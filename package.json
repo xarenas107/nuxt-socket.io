@@ -1,7 +1,7 @@
 {
   "name": "nuxt-socket.io",
   "author": "xarenas107 <xarenas107@gmail.com>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nux module for socket.io",
   "keywords": [
     "websocket",
