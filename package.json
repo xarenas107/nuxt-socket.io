@@ -1,6 +1,9 @@
 {
   "name": "nuxt-socket.io",
-  "author": "xarenas107 <xarenas107@gmail.com>",
+  "author": {
+    "name": "Xavier Arenas",
+    "email": "xarenas107@gmail.com"
+  },
   "version": "1.0.1",
   "description": "Nux module for socket.io",
   "keywords": [
@@ -10,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/xarenas107/nuxt-socket-io.git"
+    "url": "https://github.com/xarenas107/nuxt-socket.io.git"
   },
   "license": "MIT",
   "type": "module",
