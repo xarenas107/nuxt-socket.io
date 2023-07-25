@@ -25,23 +25,23 @@ My new Nuxt module for doing amazing things.
 > Requires `socket.io` and  `socket.io-client`.
 
 ```bash
-npm i socket.io socket.io-client nuxt-socket.io -D 
+npm i socket.io socket.io-client @nuxt/socket.io -D 
 
 # yarn 
-yarn add socket.io socket.io-client nuxt-socket.io -D
+yarn add socket.io socket.io-client @nuxt/socket.io -D
 
 # pnpm 
-pnpm add socket.io socket.io-client nuxt-socket.io -D
+pnpm add socket.io socket.io-client @nuxt/socket.io -D
 ```
 
 ## 🦄 Usage
 
-> Add `nuxt-socket.io` to the `modules` section of `nuxt.config.ts`.
+> Add `@nuxt/socket.io` to the `modules` section of `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
   modules: [
-    'nuxt-socket.io'
+    '@nuxt/socket.io'
   ]
 })
 ```
@@ -67,7 +67,7 @@ export default defineEventHandler(event => {
 })
 ```
 
-That's it! You can now use nuxt-socket.io in your Nuxt app ✨
+That's it! You can now use @nuxt/socket.io in your Nuxt app ✨
 
 ## Development
 
@@ -97,13 +97,13 @@ npm run release
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/nuxt-socket.io
+[npm-version-href]: https://npmjs.com/package/@nuxt/socket.io
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/nuxt-socket.io
+[npm-downloads-href]: https://npmjs.com/package/@nuxt/socket.io
 
 [license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/nuxt-socket.io
+[license-href]: https://npmjs.com/package/@nuxt/socket.io
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
