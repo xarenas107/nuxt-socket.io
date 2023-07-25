@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.4
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.0.3...v1.0.4)
+
+### 🩹 Fixes
+
+- Solve wrong install description ([24507f5](https://github.com/xarenas107/nuxt-socket.io/commit/24507f5))
+
+### ❤️  Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.0.3
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.0.2...v1.0.3)
