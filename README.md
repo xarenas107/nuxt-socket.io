@@ -16,7 +16,7 @@ My new Nuxt module for doing amazing things.
 - 👌 **Zero config**: Configuration for common use cases
 - ⚡ **Nitro ready**: Integration with nitro server.
 - 🍍 **Pinia ready**: Integration with `@pinia/nuxt` module.
-- ⚙️ **Auto import composables**: you don't need to create composables with useClientSocketIO() for client side and useServerSocketIo() for server side.
+- ⚙️ **Auto import**: Provide auto import functions for client and server side.
 - 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector
 - 🦾 **Type strong**: written in typescript
 
