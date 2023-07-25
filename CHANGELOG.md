@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.0.5
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.0.2...v1.0.5)
+
+### 🩹 Fixes
+
+- Solve wrong features description ([7b1d121](https://github.com/xarenas107/nuxt-socket.io/commit/7b1d121))
+- Solve wrong install description ([24507f5](https://github.com/xarenas107/nuxt-socket.io/commit/24507f5))
+
+### 🏡 Chore
+
+- **release:** V1.0.3 ([e58a18f](https://github.com/xarenas107/nuxt-socket.io/commit/e58a18f))
+- **release:** V1.0.4 ([56ceb2a](https://github.com/xarenas107/nuxt-socket.io/commit/56ceb2a))
+- Name package to @nuxt/socket.io ([b08bb74](https://github.com/xarenas107/nuxt-socket.io/commit/b08bb74))
+
+### ❤️  Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.0.4
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.0.3...v1.0.4)
