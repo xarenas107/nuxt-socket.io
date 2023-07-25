@@ -22,7 +22,7 @@ My new Nuxt module for doing amazing things.
 
 ## 📦 Install
 
-> `Requires socket.io` and  `socket.io-client`.
+> Requires `socket.io` and  `socket.io-client`.
 
 ```bash
 npm i socket.io socket.io-client nuxt-socket.io -D 
