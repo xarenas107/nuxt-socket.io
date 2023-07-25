@@ -11,7 +11,11 @@ import {
 } from "@nuxt/kit";
 import { version } from "../package.json";
 import defu from "defu";
-import type { ModuleOptions } from './runtime/types'
+
+export interface ModuleOptions {
+  enabled: boolean
+  composables: boolean
+}
 
 const configKey = "socket.io";
 const logger = useLogger(`nuxt:${configKey}`);
@@ -28,24 +32,14 @@ export default defineNuxtModule<ModuleOptions>({
   },
   // Default configuration options of the Nuxt module
   defaults: {
-    /**
-     * Enable socket.io module
-     *
-     * @default `true`
-     */
     enabled: true,
-    /**
-     * Automatically import `useClientSocketIo` composable
-     *
-     * @default `true`
-     */
     composables: true,
   },
   setup(options, nuxt) {
     if (!isNuxt3(nuxt))
       logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`);
 
-    options = defu(options, nuxt.options.socket);
+    options = defu(options, nuxt.options?.socket);
 
     if (!options?.enabled) return;
     const runtimeDir = resolve(`./runtime`);
