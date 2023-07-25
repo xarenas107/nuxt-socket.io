@@ -11,6 +11,8 @@ onMounted(() => io.on('pong',msg => response.value = msg))
 </script>
 
 <template>
-  <button @click="onClick"> Fetch </button>
+  <button @click="onClick">
+    Fetch
+  </button>
   <span :style="{ paddingLeft: '1rem' }"> {{ response }} </span>
 </template>

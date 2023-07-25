@@ -1,7 +1,7 @@
 import { Server, ServerOptions } from 'socket.io'
 import { useLogger } from '@nuxt/kit'
 import { H3Event, getHeader } from 'h3'
-import type { SocketH3EventContext } from '../../types'
+import type { ServerSocketIo } from '../../types'
 
 const logger = useLogger('nuxt:socket.io')
 
@@ -22,20 +22,17 @@ const parseId = (event: H3Event, id?:SocketId) => {
   return uid || undefined
 }
 
-
-
 /**
- * Get socket.io instance
- * @param { SocketId } id - Socket client id. Default value is `event.context.session.user` | `event.context.user.id` } | `ip`. You can pass custom id as string or an object with relative path to `event.context`
- * @example
- * ```js
- * useServerSocketIo(event,{ path: 'user/id' })
- * ```
- * @return { SocketH3EventContext } { `server`, `clients` and `emit` }. Emit function send message for all clients with same `id`.
- */
-
-export const useServerSocketIo = (event: H3Event, id?:SocketId): SocketH3EventContext => {
-
+  * Get socket.io instance
+  * @param event - `H3Event`
+  * @param id - Socket client id. You can pass custom id as string or an object with relative path to `event.context`. Default value is `event.context.session.user` | `event.context.user.id` } | `ip`.
+  * @example
+  * ```js
+  * useServerSocketIo(event,{ path: 'user/id' })
+  * ```
+  * @returns {} { `server`, `clients` and `emit` }. Emit function send message for all clients with same `id`.
+*/
+export const useServerSocketIo:ServerSocketIo = (event, id) => {
   const { io, user, session } = event.context
   const { socket } = event.node.res as any
 
@@ -78,7 +75,7 @@ export const useServerSocketIo = (event: H3Event, id?:SocketId): SocketH3EventCo
   event.context.io.clients = clients
 
   // define emit function for every client with same uid
-  event.context.io.emit = (event:string, message?:string) => {
+  event.context.io.emit = (event, message?) => {
       const sockets = clients.get(uid)
       sockets?.forEach(id => {
         server.sockets.sockets.get(id)?.emit(event, message)
