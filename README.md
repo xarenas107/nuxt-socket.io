@@ -1,13 +1,4 @@
-<!--
-Get your module up and running quickly.
-
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
-
-# My Module
+# Nuxt Socket.io
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -19,40 +10,64 @@ My new Nuxt module for doing amazing things.
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
+## 🚀 Features
 
-## Features
+- ⛰ **Nuxt 3 ready**
+- 👌 **Zero config**: Configuration for common use cases
+- ⚡ **Nitro ready**: Integration with nitro server.
+- 🍍 **Pinia ready**: Integration with `@pinia/nuxt` module.
+- ⚙️ **Auto import composables**: you don't need to create composables with useClientSocketIO() for client side and useServerSocketIo() for server side.
+- 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector
+- 🦾 **Type strong**: written in typescript
 
-<!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+## 📦 Install
 
-## Quick Setup
-
-1. Add `my-module` dependency to your project
+> `Requires socket.io` and  `socket.io-client`.
 
 ```bash
-# Using pnpm
-pnpm add -D my-module
+npm i socket.io socket.io-client nuxt-socket.io -D 
 
-# Using yarn
-yarn add --dev my-module
+# yarn 
+yarn add socket.io socket.io-client nuxt-socket.io -D
 
-# Using npm
-npm install --save-dev my-module
+# pnpm 
+pnpm add socket.io socket.io-client nuxt-socket.io -D
 ```
 
-2. Add `my-module` to the `modules` section of `nuxt.config.ts`
+## 🦄 Usage
+
+> Add `nuxt-socket.io` to the `modules` section of `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
   modules: [
-    'my-module'
+    'nuxt-socket.io'
   ]
 })
 ```
 
-That's it! You can now use My Module in your Nuxt app ✨
+> Use `useClientSocketIo()` on client side and the `useServerSocketIo()` on server side.
+
+```js
+// On client side
+<script lang='ts' setup>
+  const io = useClientSocketIo()
+  io.on('pong',(message) => console.log(message))
+  
+  await $fetch('/api/ping')
+</script>
+```
+
+```js
+// On server side
+export default defineEventHandler(event => {
+  const io = useServerSocketIo(event)
+  io.emit('pong','Response from server')
+  return
+})
+```
+
+That's it! You can now use nuxt-socket.io in your Nuxt app ✨
 
 ## Development
 
@@ -82,13 +97,13 @@ npm run release
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/my-module
+[npm-version-href]: https://npmjs.com/package/nuxt-socket.io
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/my-module
+[npm-downloads-href]: https://npmjs.com/package/nuxt-socket.io
 
 [license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/my-module
+[license-href]: https://npmjs.com/package/nuxt-socket.io
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
