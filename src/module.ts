@@ -2,10 +2,7 @@ import {
   defineNuxtModule,
   useLogger,
   createResolver,
-  addPlugin,
-  addImportsDir,
   hasNuxtModule,
-  addTemplate,
   isNuxt3,
   getNuxtVersion,
 } from "@nuxt/kit";
@@ -17,83 +14,77 @@ export interface ModuleOptions {
   composables: boolean
 }
 
-const configKey = "socket.io";
+const configKey = "socketIO";
 const logger = useLogger(`nuxt:${configKey}`);
 const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "nuxt-socket.io",
+    name: "nuxt/socketIO",
     configKey,
     compatibility: {
       nuxt: "^3.0.0",
     },
     version,
   },
-  // Default configuration options of the Nuxt module
   defaults: {
     enabled: true,
     composables: true,
   },
   setup(options, nuxt) {
-    if (!isNuxt3(nuxt))
-      logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`);
+    if (!options.enabled) return
 
-    options = defu(options, nuxt.options?.socket);
+    if (!isNuxt3(nuxt)) logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`)
 
-    if (!options?.enabled) return;
-    const runtimeDir = resolve(`./runtime`);
+    const runtimeDir = resolve(`./runtime`)
+    const isPiniaModule = hasNuxtModule('@pinia/nuxt',nuxt)
 
-    // import types
-    addTemplate({
-      filename: `types/${configKey}.d.ts`,
-      src: resolve(runtimeDir, "types.d.ts"),
-    });
+    // transpile runtime
+    nuxt.options.build.transpile.push(runtimeDir)
 
-    // pinia integration
-    const isPiniaModule = hasNuxtModule("@pinia/nuxt", nuxt);
-    nuxt.hook("modules:done", () => {
+    nuxt.hook('app:templates',app => {
+      // import templates
+      app.templates.push({
+        filename: `types/${ configKey }.d.ts`,
+        src: resolve(runtimeDir,'types.d.ts')
+      })
+      // import plugins
+      app.plugins.push({ src: resolve(runtimeDir, `plugins/${configKey}.client.ts`) })
 
-      if (!isPiniaModule) return;
-      addTemplate({
-        filename: `types/${configKey}.pinia.d.ts`,
-        src: resolve(runtimeDir, "types.pinia.d.ts"),
-      });
-
-      addPlugin({ src: resolve(runtimeDir, "plugins/pinia") });
-    });
-
-    // import types
-    const { buildDir } = nuxt.options;
-    nuxt.hook("prepare:types", ({ references }) => {
-      references.push({ types: configKey });
-      references.push({ path: resolve(buildDir, `types/${configKey}.d.ts`) });
-
+      // pinia integration
       if (isPiniaModule) {
-        references.push({
-          path: resolve(buildDir, `types/${configKey}.pinia.d.ts`),
-        });
+        app.templates.push({
+          filename: `types/${ configKey }.pinia.d.ts`,
+          src:resolve(runtimeDir,'types.pinia.d.ts')
+        })
+        app.plugins.push({ src: resolve(runtimeDir, 'plugins/pinia.ts') })
       }
-    });
-
-    // enable socket io server
-    nuxt.hook("nitro:config", (nitro) => {
-      if (nitro.imports) {
-        const name = "useServerSocketIo";
-        nitro.imports.imports = nitro.imports?.imports || [];
-        nitro.imports?.imports?.push({
-          name,
-          from: resolve(runtimeDir, "server/services"),
-        });
-      }
-    });
-
-    // socket.io plugin
-    addPlugin({ src: resolve(runtimeDir, "plugins/socket.client") });
+    })
 
     // import composables
-    if (options.composables) addImportsDir(resolve(runtimeDir, "composables"));
+    nuxt.hook('imports:dirs', dirs => {
+      if (!options.composables) return
+      dirs.push(resolve(runtimeDir,'composables'))
+    })
 
-    logger.success("Socket.io connected");
-  },
+    // import server functions
+    nuxt.hook('nitro:config', nitro => {
+      if (!nitro.imports) return
+      const name = 'useServerSocketIO'
+      nitro.imports.imports = nitro.imports?.imports || []
+      nitro.imports?.imports?.push({ name, from: resolve(runtimeDir,'server/services') })
+    })
+
+    // import types
+    const { buildDir } = nuxt.options
+    nuxt.hook('prepare:types', ({ references }) => {
+      references.push({ path: resolve(buildDir, `types/${ configKey }.d.ts`) })
+
+      if (isPiniaModule) {
+        references.push({ path: resolve(buildDir, `types/${ configKey }.pinia.d.ts`) })
+      }
+    })
+
+    logger.success('SocketIO connected')
+  }
 });

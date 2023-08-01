@@ -1,9 +1,5 @@
 import { Server, ServerOptions } from 'socket.io'
-import { useLogger } from '@nuxt/kit'
 import { H3Event, getHeader } from 'h3'
-import type { ServerSocketIo } from '../../types'
-
-const logger = useLogger('nuxt:socket.io')
 
 const clients = new Map<string,string[]>()
 let server:Server
@@ -23,35 +19,33 @@ const parseId = (event: H3Event, id?:SocketId) => {
 }
 
 /**
-  * Get socket.io instance
-  * @param event - `H3Event`
-  * @param id - Socket client id. You can pass custom id as string or an object with relative path to `event.context`. Default value is `event.context.session.user` | `event.context.user.id` } | `ip`.
+  * @param { H3Event } event - `H3Event`
+  * @param { string } id - Socket client id. You can pass custom id as string or an object with relative path to `event.context`. Default value is `event.context.session.user` | `event.context.user.id` } | `ip`.
   * @example
   * ```js
   * useServerSocketIo(event,{ path: 'user/id' })
   * ```
   * @returns {} { `server`, `clients` and `emit` }. Emit function send message for all clients with same `id`.
 */
-export const useServerSocketIo:ServerSocketIo = (event, id) => {
-  const { io, user, session } = event.context
+
+export const useServerSocketIO = (event:H3Event, id:string) => {
+  const { user, session } = event.context
   const { socket } = event.node.res as any
 
-  // define client uid
+  // define client id
   const ip = getHeader(event, 'x-forwarded-for') || event.node.req.socket.remoteAddress
   const uid = parseId(event, id) || session?.user || user?.id || ip
 
-  if (!uid) throw new Error('No valid id provided')
+  if (!uid) throw createError('No valid id provided')
 
-  // start websocket server
+  // start socketIO server
   if (!server) {
       const options = socket?.server as ServerOptions
       server = new Server(options)
 
-      // close server when close nitro
+      // close server on close nitro
       const nitro = useNitroApp()
       nitro.hooks.hook('close',() => { server.close() })
-
-      server.on('error',(error) => { logger.error(error) })
 
       server.on('connection', (socket) => {
           // store socket id on connection
@@ -69,13 +63,13 @@ export const useServerSocketIo:ServerSocketIo = (event, id) => {
       })
   }
 
-  // add io to context
-  event.context.io = io || {}
-  event.context.io.server = server
-  event.context.io.clients = clients
+  // add socketIO to context
+  event.context.socketIO = event.context.socketIO || {}
+  event.context.socketIO.server = server
+  event.context.socketIO.clients = clients
 
-  // define emit function for every client with same uid
-  event.context.io.emit = (event, message?) => {
+  // define custom emit function
+  event.context.socketIO.emit = (event, message?) => {
       const sockets = clients.get(uid)
       sockets?.forEach(id => {
         server.sockets.sockets.get(id)?.emit(event, message)
@@ -83,5 +77,5 @@ export const useServerSocketIo:ServerSocketIo = (event, id) => {
   }
 
   // return io
-  return event.context.io
+  return event.context.socketIO
 }
