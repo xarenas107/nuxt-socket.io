@@ -20,7 +20,7 @@ My new Nuxt module for doing amazing things.
 - 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector
 - 🦾 **Type strong**: written in typescript
 
-## 📦 Install
+<!-- ## 📦 Install
 
 > Requires `socket.io` and  `socket.io-client`.
 
@@ -32,7 +32,7 @@ yarn add socket.io socket.io-client @nuxt/socket.io -D
 
 # pnpm 
 pnpm add socket.io socket.io-client @nuxt/socket.io -D
-```
+``` -->
 
 ## 🦄 Usage
 
