@@ -1,6 +1,7 @@
 import { Server } from 'socket.io'
 import type { Server as HTTPServer } from 'http'
 import { useLogger } from "@nuxt/kit"
+import type { defineNitroPlugin } from '#imports'
 import { serverOptions } from '#socket.io:server:config'
 
 let wss:Server

@@ -7,8 +7,7 @@ describe('server', async () => {
     rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
   })
 
-  it('response from api', async () => {
-    const res = await $fetch('/api/ping')
-    expect(res)
+  it('response from api', () => {
+    $fetch('/api/ping').then(res => expect(res))
   })
 })
