@@ -17,8 +17,9 @@ My new Nuxt module for doing amazing things.
 - ⚡ **Nitro ready**: Integration with nitro server.
 - 🍍 **Pinia ready**: Integration with `@pinia/nuxt` module.
 - ⚙️ **Auto import**: Provide auto import functions for client and server side.
-- 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector
-- 🦾 **Type strong**: written in typescript
+- 🪝 **Customizable**: Provide hooks for customization on client and server side.
+- 🦾 **Type strong**: Written in typescript
+<!-- - 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector -->
 
 <!-- ## 📦 Install
 
@@ -46,13 +47,21 @@ export default defineNuxtConfig({
 })
 ```
 
-> Use `useClientSocketIo()` on client side and the `useServerSocketIo()` on server side.
+> Extends socket.io configuration with `nuxt hooks`.
+
+| Hook                     | Argument  | #Enviroment  | Description                                  |
+|--------------------------|-----------|--------------|----------------------------------------------|
+| socket.io:server:config  | options   | server       |  Called before configuring socket.io server  |
+| socket.io:config         | options   | client       | Called before configuring socket.io-client   |
+| socket.io:done           | socket    | client       | Called after socket.io-client initialization |
+
+> Use `useSocketIO()` on client side and the `useServerSocketIO()` on server side.
 
 ```js
 // On client side
 <script lang='ts' setup>
-  const io = useClientSocketIo()
-  io.on('pong',(message) => console.log(message))
+  const io = useSocketIO()
+  io.on('pong',(message:string) => console.log(message))
   
   await $fetch('/api/ping')
 </script>
@@ -65,6 +74,49 @@ export default defineEventHandler(event => {
   io.emit('pong','Response from server')
   return
 })
+```
+
+> Or you can create your own handlers
+
+```js
+// On server side plugin `server/plugins/wss.ts`
+export default defineNitroPlugin(nitro => {
+
+  // Add nitro hook
+  nitro.hooks.hook('render:response', (response,{ event }) => {
+    const { session, user, io } = event.context
+    const uid = user?.id || session?.user?.toString()
+
+    // Add connection listener
+    if (!event.context.io?.server?.sockets?.adapter?.rooms?.has(uid)) {
+      io.server.on('connection', socket => {
+        if (!uid) return
+        socket.on('disconnect',() => socket.leave(uid))
+        socket.join(uid)
+      })
+    }
+  })
+})
+```
+
+```js
+// On server side middleware `server/middleware/wss.ts`
+import type { Server } from 'socket.io'
+
+export default defineEventHandler(event => {
+  const { session, user, io } = event.context
+  const uid = user?.id || session?.user?.toString()
+
+  event.context.io.emit = (event, message) => {
+    return io.server.to(uid).compress(true).emit(event, message)
+  }
+})
+
+declare module 'h3' {
+  interface SocketH3EventContext {
+    emit: Server['emit']
+  }
+}
 ```
 
 That's it! You can now use @nuxt/socket.io in your Nuxt app ✨
@@ -96,14 +148,14 @@ npm run release
 ```
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/@nuxt/socket.io
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt-socket.io/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/@nuxt-socket.io
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/@nuxt/socket.io
+[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt-socket.io.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/@nuxt-socket.io
 
-[license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/@nuxt/socket.io
+[license-src]: https://img.shields.io/npm/l/@nuxt-socket.io.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://npmjs.com/package/@nuxt-socket.io
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
