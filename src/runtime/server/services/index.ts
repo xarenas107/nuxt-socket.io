@@ -1,1 +1,1 @@
-export { useServerSocketIO } from './server'
+export { useServerSocketIO } from './useServerSocketIO'
