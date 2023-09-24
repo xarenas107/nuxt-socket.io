@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue-demi'
-import { useClientSocketIO } from '#imports'
+import { useSocketIO } from '#imports'
 
 const response = ref('Request from client')
-const io = useClientSocketIO()
+const io = useSocketIO()
 
 
 const onClick = () => $fetch('api/ping')

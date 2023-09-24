@@ -1,1 +1,1 @@
-export const useClientSocketIO = () => useNuxtApp().$socketIO
+export const useSocketIO = () => useNuxtApp().$socketIO
