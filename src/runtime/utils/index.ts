@@ -1,0 +1,1 @@
+export { clientOptions } from './config'
