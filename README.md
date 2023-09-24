@@ -76,7 +76,7 @@ export default defineEventHandler(event => {
 })
 ```
 
-> Or you can create your own handlers
+> Or you can create your own methods
 
 ```js
 // On server side plugin `server/plugins/wss.ts`
@@ -117,6 +117,16 @@ declare module 'h3' {
     emit: Server['emit']
   }
 }
+```
+
+```js
+// On server handler `server/api/chat.post.ts`
+export default defineEventHandler(event => {
+  const body = await readBody(event)
+  
+  // Update data on client
+  const socket = getSocketIO(event)
+  socket.emit('message', body)})
 ```
 
 That's it! You can now use @nuxt/socket.io in your Nuxt app ✨
