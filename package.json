@@ -45,19 +45,19 @@
   "dependencies": {
     "@nuxt/kit": "^3.6.5",
     "defu": "^6.1.2",
-    "socket.io": "^4.7.1",
-    "socket.io-client": "^4.7.1"
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxt/eslint-config": "^0.1.1",
-    "@nuxt/module-builder": "^0.4.0",
+    "@nuxt/devtools": "^0.8.4",
+    "@nuxt/eslint-config": "^0.2.0",
+    "@nuxt/module-builder": "^0.5.1",
     "@nuxt/schema": "^3.6.5",
-    "@nuxt/test-utils": "^3.6.5",
-    "@types/node": "^18.17.0",
-    "changelogen": "^0.5.4",
-    "eslint": "^8.45.0",
-    "nuxt": "^3.6.5",
-    "vitest": "^0.33.0"
+    "@nuxt/test-utils": "^3.7.3",
+    "@types/node": "^20.6.5",
+    "changelogen": "^0.5.5",
+    "eslint": "^8.50.0",
+    "nuxt": "^3.7.3",
+    "vitest": "^0.34.5"
   }
 }
