@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.0.5...v1.1.0)
+
+### 🚀 Enhancements
+
+- Add configuration hooks ([92a4637](https://github.com/xarenas107/nuxt-socket.io/commit/92a4637))
+
+### 🩹 Fixes
+
+- Add missing types ([050c8b0](https://github.com/xarenas107/nuxt-socket.io/commit/050c8b0))
+
+### 💅 Refactors
+
+- Rename composables ([75579e3](https://github.com/xarenas107/nuxt-socket.io/commit/75579e3))
+- Rename useClientSocketIO > useSocketIO ([56e7432](https://github.com/xarenas107/nuxt-socket.io/commit/56e7432))
+
+### 🏡 Chore
+
+- Add auth tocken ([fe4f4e7](https://github.com/xarenas107/nuxt-socket.io/commit/fe4f4e7))
+- **docs:** Hide install commands ([e918e9d](https://github.com/xarenas107/nuxt-socket.io/commit/e918e9d))
+- Update documentation ([c3d386f](https://github.com/xarenas107/nuxt-socket.io/commit/c3d386f))
+- Add config files ([0004e09](https://github.com/xarenas107/nuxt-socket.io/commit/0004e09))
+- Update npm dependences ([e2f2084](https://github.com/xarenas107/nuxt-socket.io/commit/e2f2084))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.0.5
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.0.2...v1.0.5)
