@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.2.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- Add basic store ([ae1cf8e](https://github.com/xarenas107/nuxt-socket.io/commit/ae1cf8e))
+
+### 🏡 Chore
+
+- **doc:** Update documentation ([452e9d9](https://github.com/xarenas107/nuxt-socket.io/commit/452e9d9))
+- Update dependences ([914dd22](https://github.com/xarenas107/nuxt-socket.io/commit/914dd22))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.2.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.1.0...v1.2.0)
