@@ -55,12 +55,12 @@ export default defineNuxtConfig({
 | socket.io:config         | options   | client       | Called before configuring socket.io-client   |
 | socket.io:done           | socket    | client       | Called after socket.io-client initialization |
 
-> Use `useSocketIO()` on client side and the `useServerSocketIO()` on server side.
+> Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useServerSocketIO()` on server side.
 
 ```js
 // On client side
 <script lang='ts' setup>
-  const io = useSocketIO()
+  const io = useSocketIOStore() // Prevent duplicated listener
   io.on('pong',(message:string) => console.log(message))
   
   await $fetch('/api/ping')
