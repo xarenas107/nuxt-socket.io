@@ -49,7 +49,7 @@
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.8.5",
+    "@nuxt/devtools": "^1.0.1",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.1",
     "@nuxt/schema": "^3.6.5",
