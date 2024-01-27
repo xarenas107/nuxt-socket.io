@@ -1,6 +1,6 @@
 import { useNuxtApp } from '#app'
 import type { Socket } from "socket.io-client"
-
+import { reactive } from 'vue'
 
 export const useSocketIOStore = (socket?:Socket) => {
 
