@@ -1,5 +1,3 @@
-import type { defineNitroPlugin } from '#imports'
-
 export default defineNitroPlugin(nitro => {
 
 	// Add nitro hook

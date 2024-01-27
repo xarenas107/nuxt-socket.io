@@ -1,6 +1,5 @@
 import { Server } from 'socket.io'
 import type { Server as HTTPServer } from 'http'
-import type { defineNitroPlugin } from '#imports'
 
 let wss:Server
 
@@ -20,7 +19,7 @@ export default defineNitroPlugin(nitro => {
 			transports:['websocket','polling'],
 			cors: {
 				credentials:true,
-				origin: [runtime.domain,`${ip}:${url.port}`,url.host],
+				origin: [runtime?.domain,`${ip}:${url.port}`,url.host],
 			}
 		})
 
