@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.11
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.10...v1.3.11)
+
+### 🏡 Chore
+
+- Return io on store ([a30923f](https://github.com/xarenas107/nuxt-socket.io/commit/a30923f))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.10
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.9...v1.3.10)
