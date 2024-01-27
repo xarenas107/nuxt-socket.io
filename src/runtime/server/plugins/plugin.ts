@@ -12,27 +12,15 @@ let wss:Server
 
 export default defineNitroPlugin(nitro => {
 
-	nitro.hooks.hookOnce('request', event => {
+	nitro.hooks.hookOnce('request', async event => {
 		const runtime = useRuntimeConfig()
 
 		// Start socket server
 		const { socket } = event.node.res as any
 
-		const ip = getRequestIP(event,{ xForwardedFor:true })
-		const url = getRequestURL(event)
-
 		const server = socket?.server as HTTPServer
-
-    const origin = [`${ip}:${url.port}`,url.host]
-    if (runtime?.domain) origin.push(runtime.domain as string)
-
-		wss = new Server(server,{
-			transports:['websocket','polling'],
-			cors: {
-				credentials:true,
-				origin,
-			}
-		})
+    const options = { ...runtime.public?.['socket.io']?.server }
+		wss = new Server(server,options)
 
 		if (wss) console.info('Websocket server connected')
 
@@ -46,6 +34,8 @@ export default defineNitroPlugin(nitro => {
     })
 
 		nitro.hooks.hook('close',() => wss.close())
+    await nitro.hooks.callHook('socket.io:server:done',wss)
+
 
 		// Increase event listener limit
 		event.node.req.setMaxListeners(15)

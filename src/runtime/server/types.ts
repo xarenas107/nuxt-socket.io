@@ -1,4 +1,4 @@
-import type { Server, ServerOptions } from 'socket.io'
+import type { Server } from 'socket.io'
 
 export type SocketServer = Server
 export type { ServerOptions } from 'socket.io'
@@ -14,6 +14,7 @@ declare module 'h3' {
 
 declare module 'nitropack' {
 	interface NitroRuntimeHooks {
-    'socket.io:server:config': (options:ServerOptions) => Promise<void> | void
+    'socket.io:server:done': (options:Server) => Promise<void> | void
   }
 }
+

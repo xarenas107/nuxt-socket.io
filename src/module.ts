@@ -12,6 +12,7 @@ import {
 } from "@nuxt/kit"
 
 import { version } from "../package.json"
+import defu from "defu"
 import type { ModuleOptions } from "./types"
 
 export type * from "./types";
@@ -40,12 +41,19 @@ export default defineNuxtModule<ModuleOptions>({
     enabled: true,
     pinia: false,
     composables: true,
+    client:{},
+    server:{}
   },
   async setup(options, nuxt) {
     if (!options.enabled) return;
 
     if (!isNuxt3(nuxt))
       logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`);
+
+
+    // Config
+    const config = nuxt.options.runtimeConfig
+    config.public['socket.io'] = defu(config.public?.['socket.io'] || {}, options)
 
     // Transpile
     nuxt.options.build.transpile.push(runtimeDir)
