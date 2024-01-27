@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.9
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.8...v1.3.9)
+
+### 💅 Refactors
+
+- Better code reading ([8c93de5](https://github.com/xarenas107/nuxt-socket.io/commit/8c93de5))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.8
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.7...v1.3.8)
