@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.12
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.11...v1.3.12)
+
+### 🩹 Fixes
+
+- Solve minor bugs ([9ace6b8](https://github.com/xarenas107/nuxt-socket.io/commit/9ace6b8))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.11
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.10...v1.3.11)
