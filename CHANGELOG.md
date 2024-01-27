@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.4
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.3...v1.4.4)
+
+### 🩹 Fixes
+
+- Solve missing imports ([365eaa4](https://github.com/xarenas107/nuxt-socket.io/commit/365eaa4))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.4.3
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.2...v1.4.3)
