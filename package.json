@@ -4,7 +4,7 @@
     "name": "Xavier Arenas",
     "email": "xarenas107@gmail.com"
   },
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Nux module for socket.io",
   "keywords": [
     "websocket",
@@ -32,11 +32,13 @@
   ],
   "scripts": {
     "prepack": "nuxt-module-build",
+    "build": "nuxt-module-build && npm run build:client",
+    "build:client": "nuxi generate client",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "release": "npm run lint && npm run prepack && changelogen --release && npm publish --access public && git push --follow-tags",
-    "lint": "eslint .",
+    "release": "npm run lint && npm run build && changelogen --release && npm publish --access public && git push --follow-tags",
+    "lint": "eslint . --fix",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
