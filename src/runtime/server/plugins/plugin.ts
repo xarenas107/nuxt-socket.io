@@ -1,9 +1,11 @@
 import { Server } from 'socket.io'
 import type { Server as HTTPServer } from 'http'
+import type { defineNitroPlugin } from '#imports'
 
 let wss:Server
 
 export default defineNitroPlugin(nitro => {
+
 	nitro.hooks.hookOnce('request', event => {
 		const runtime = useRuntimeConfig()
 

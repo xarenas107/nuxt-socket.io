@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 | socket.io:config         | options   | client       | Called before configuring socket.io-client   |
 | socket.io:done           | socket    | client       | Called after socket.io-client initialization |
 
-> Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useServerSocketIO()` on server side.
+> Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useSocketIO()` on server side.
 
 ```js
 // On client side

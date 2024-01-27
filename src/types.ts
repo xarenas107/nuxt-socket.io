@@ -1,6 +1,9 @@
-import type { Socket, SocketOptions } from 'socket.io-client'
+
+import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
+import type { defineSocketIOStore } from '../dist/runtime/utils'
 
 export type SocketClient = Socket
+type Options = Partial<SocketOptions & ManagerOptions>
 
 export interface ModuleOptions {
   enabled: boolean
@@ -10,10 +13,11 @@ export interface ModuleOptions {
 
 declare module '#app' {
   interface NuxtApp {
-    $socketIO: SocketClient
+    $io: SocketClient
+    '$io:store': ReturnType<typeof defineSocketIOStore>
   }
 	interface RuntimeNuxtHooks {
-    'socket.io:config': (options:SocketOptions) => Promise<void> | void
+    'socket.io:config': (options:Options) => Promise<void> | void
     'socket.io:done': (options:Socket) => Promise<void> | void
   }
 }

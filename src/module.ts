@@ -9,8 +9,8 @@ import {
   addImportsDir,
   addServerHandler,
   addServerPlugin,
-  addServerImportsDir
-} from "@nuxt/kit";
+  addServerImportsDir,
+} from "@nuxt/kit"
 
 import { version } from "../package.json"
 import type { ModuleOptions } from "./types"
@@ -50,7 +50,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Transpile and alias runtime
     nuxt.options.alias['#socket.io:server:config'] = resolve(serverDir,'utils')
-    nuxt.options.alias['#socket.io:config'] = resolve(runtimeDir,'utils')
     nuxt.options.build.transpile.push(runtimeDir)
 
     // Add plugins

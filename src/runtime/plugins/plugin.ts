@@ -1,5 +1,5 @@
 import { io, type Socket } from "socket.io-client"
-import { clientOptions } from '#socket.io:config'
+import { clientOptions, defineSocketIOStore } from "../../../dist/runtime/utils"
 
 type SocketIOPlugin = { socket:Socket }
 
@@ -11,7 +11,12 @@ export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
 	const socket = io(url,clientOptions)
 	window.onbeforeunload = () => { socket.close() }
 
-
 	await nuxt.hooks.callHook('socket.io:done',socket)
-	nuxt.provide('io', socket)
+
+  // Define store and save connection id
+  const store = defineSocketIOStore(socket)
+  socket.on('connect',() => store.id = socket.id)
+
+  nuxt.provide('io', socket)
+  nuxt.provide('io:store', store)
 })

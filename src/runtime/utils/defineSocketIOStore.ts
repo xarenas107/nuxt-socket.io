@@ -1,9 +1,10 @@
-export const useSocketIOStore = () => {
-	const io = useSocketIO()
+import type { Socket } from "socket.io-client"
+
+export const defineSocketIOStore = (io:Socket) => {
 
 	// State
-	const state = reactive({
-    id: io.id ?? '',
+	const state = reactive<State>({
+    id: io?.id ?? '',
     value: new Map()
   })
 
