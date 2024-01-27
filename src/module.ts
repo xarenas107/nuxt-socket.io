@@ -47,12 +47,8 @@ export default defineNuxtModule<ModuleOptions>({
     if (!isNuxt3(nuxt))
       logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`);
 
-    // Transpile and alias runtime
-    nuxt.options.alias['#socket.io:server:config'] = resolve(serverDir,'utils')
-    nuxt.options.build.transpile.push(runtimeDir)
-
     // Add plugins
-    addPlugin({ src: resolve(pluginsDir, "plugin.ts"), mode: "client" })
+    addPlugin({ src: resolve(pluginsDir, "plugin"), mode: "client" })
 
     options.pinia = hasNuxtModule("@pinia/nuxt", nuxt);
     if (options.pinia) addPlugin({ src: resolve(pluginsDir, "pinia") })
