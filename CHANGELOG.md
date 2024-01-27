@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.13...v1.4.0)
+
+### 🚀 Enhancements
+
+- Add module configuration for client and server ([21c9d49](https://github.com/xarenas107/nuxt-socket.io/commit/21c9d49))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.13
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.12...v1.3.13)
