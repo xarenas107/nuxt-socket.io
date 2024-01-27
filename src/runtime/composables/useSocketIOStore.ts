@@ -1,6 +1,7 @@
 import type { Socket } from "socket.io-client"
 
-export const defineSocketIOStore = (io:Socket) => {
+export const useSocketIOStore = (socket?:Socket) => {
+  const io = socket || useSocketIO()
 
 	// State
 	const state = reactive<State>({

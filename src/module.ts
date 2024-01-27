@@ -7,7 +7,6 @@ import {
   getNuxtVersion,
   addPlugin,
   addImportsDir,
-  addServerHandler,
   addServerPlugin,
   addServerImportsDir,
 } from "@nuxt/kit"
@@ -63,14 +62,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Add server plugin
     addServerPlugin(resolve(serverDir, "plugins/plugin"));
-
-
-    // Add server middleware
-    addServerHandler({
-      middleware: true,
-      handler: resolve(serverDir, "middleware/context"),
-      lazy: true,
-    });
 
     // Import server functions
     addServerImportsDir(resolve(serverDir, "services"))
