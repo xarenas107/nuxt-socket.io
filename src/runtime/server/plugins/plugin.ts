@@ -31,6 +31,16 @@ export default defineNitroPlugin(nitro => {
 		})
 
 		if (wss) console.info('Websocket server connected')
+
+    // Remove client socket id on disconnect
+    wss.on('connection', socket => {
+      socket.on('disconnect',() => {
+        wss.sockets?.adapter?.rooms.forEach(room => {
+          if (room.has(socket.id)) room.delete(socket.id)
+        })
+      })
+    })
+
 		nitro.hooks.hook('close',() => wss.close())
 
 		// Increase event listener limit
@@ -41,19 +51,5 @@ export default defineNitroPlugin(nitro => {
 	nitro.hooks.hook('request', event => {
 		event.context.io = event.context.io || {}
 		event.context.io.server = wss
-	})
-
-  nitro.hooks.hook('render:response', (_,{ event }) => {
-    const { io } = event.context
-
-
-		io.server.on('connection', socket => {
-			// Remove client socket id on disconnect
-			socket.on('disconnect',() => {
-				io?.server?.sockets?.adapter?.rooms.forEach(room => {
-					if (room.has(socket.id)) room.delete(socket.id)
-				})
-			})
-		})
 	})
 })

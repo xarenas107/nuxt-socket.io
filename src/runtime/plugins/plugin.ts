@@ -6,6 +6,8 @@ export const clientOptions:Partial<SocketOptions & ManagerOptions> = { withCrede
 type SocketIOPlugin = { socket:Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
+  const store = useSocketIOStore()
+
   await nuxt.hooks.callHook('socket.io:config',clientOptions)
 
   const { origin } = window.location
@@ -16,7 +18,6 @@ export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
 	await nuxt.hooks.callHook('socket.io:done',socket)
 
   // Define store and save connection id
-  const store = useSocketIOStore(socket)
   socket.on('connect',() => store.id = socket.id || '')
   nuxt.provide('io', socket)
 })

@@ -58,6 +58,7 @@ export const useSocketIOStore = (socket?:Socket) => {
 	}
 
 	return {
+    io,
     ...state,
     ...actions
   }
