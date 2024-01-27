@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.6
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.5...v1.4.6)
+
+### 🩹 Fixes
+
+- Solve missing getCurrentInstance ([24a0f0c](https://github.com/xarenas107/nuxt-socket.io/commit/24a0f0c))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.4.5
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.4...v1.4.5)
