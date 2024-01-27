@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.3.2
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.1...v1.3.2)
+
+### 🏡 Chore
+
+- Internal changes for npm publish ([ce3a7af](https://github.com/xarenas107/nuxt-socket.io/commit/ce3a7af))
+- Internal changes for npm publish ([9fb1045](https://github.com/xarenas107/nuxt-socket.io/commit/9fb1045))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.1
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.0...v1.3.1)
