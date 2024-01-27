@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.3.3
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.2...v1.3.3)
+
+### 🩹 Fixes
+
+- Solve missing defineNitroPlugin ([41c3d69](https://github.com/xarenas107/nuxt-socket.io/commit/41c3d69))
+
+### 🏡 Chore
+
+- Internal changes for npm publish ([a493934](https://github.com/xarenas107/nuxt-socket.io/commit/a493934))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.2
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.1...v1.3.2)
