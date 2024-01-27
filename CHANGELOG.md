@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.7
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.6...v1.3.7)
+
+### 🩹 Fixes
+
+- Remove some virtual:imports ([5819c76](https://github.com/xarenas107/nuxt-socket.io/commit/5819c76))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.6
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.5...v1.3.6)
