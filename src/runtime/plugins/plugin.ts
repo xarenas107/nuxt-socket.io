@@ -1,5 +1,5 @@
 import { io, type Socket } from "socket.io-client"
-import { clientOptions, defineSocketIOStore } from "../../../dist/runtime/utils"
+import { clientOptions, defineSocketIOStore } from "../../runtime/utils"
 
 type SocketIOPlugin = { socket:Socket }
 

@@ -16,9 +16,13 @@ onMounted(() => io.on('pong',msg => response.value = msg))
   <span :style="{ paddingLeft: '1rem' }"> {{ response }} </span>
   <client-only>
     <template #fallback>
-      <div :style="{ paddingLeft: '1rem' }"> Connecting... </div>
+      <div :style="{ paddingLeft: '1rem' }">
+        Connecting...
+      </div>
     </template>
 
-    <div :style="{ paddingLeft: '1rem' }"> Connected with id: {{ io.id }} </div>
+    <div :style="{ paddingLeft: '1rem' }">
+      Connected with id: {{ io.id }}
+    </div>
   </client-only>
 </template>
