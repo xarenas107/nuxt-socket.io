@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.4.3
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.2...v1.4.3)
+
+### 🏡 Chore
+
+- Add missing types ([40f1b0a](https://github.com/xarenas107/nuxt-socket.io/commit/40f1b0a))
+- Add missing types ([60bc202](https://github.com/xarenas107/nuxt-socket.io/commit/60bc202))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.4.2
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.1...v1.4.2)
