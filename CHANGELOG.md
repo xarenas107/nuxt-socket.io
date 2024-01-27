@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.0...v1.4.1)
+
+### 🩹 Fixes
+
+- Solve missing runtime config ([801ef9b](https://github.com/xarenas107/nuxt-socket.io/commit/801ef9b))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.4.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.13...v1.4.0)
