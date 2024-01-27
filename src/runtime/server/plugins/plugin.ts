@@ -1,27 +1,35 @@
 import { Server } from 'socket.io'
 import type { Server as HTTPServer } from 'http'
-import { useLogger } from "@nuxt/kit"
-import type { defineNitroPlugin } from '#imports'
-import { serverOptions } from '#socket.io:server:config'
 
 let wss:Server
 
-const logger = useLogger('nuxt:socketIO')
-
 export default defineNitroPlugin(nitro => {
-	nitro.hooks.hookOnce('request',async event => {
+	nitro.hooks.hookOnce('request', event => {
+		const runtime = useRuntimeConfig()
 
 		// Start socket server
-		if (!wss) {
-			const { socket } = event.node.res as any
-			const server = socket?.server as HTTPServer
+		const { socket } = event.node.res as any
 
-      await nitro.hooks.callHook('socket.io:server:config',serverOptions)
-			wss = new Server(server,serverOptions)
-			if (wss) logger.success('Websocket server connected')
-			nitro.hooks.hook('close',() => wss.close())
-		}
+		const ip = getRequestIP(event,{ xForwardedFor:true })
+		const url = getRequestURL(event)
+
+		const server = socket?.server as HTTPServer
+		wss = new Server(server,{
+			transports:['websocket','polling'],
+			cors: {
+				credentials:true,
+				origin: [runtime.domain,`${ip}:${url.port}`,url.host],
+			}
+		})
+
+		if (wss) console.info('Websocket server connected')
+		nitro.hooks.hook('close',() => wss.close())
+
+		// Increase event listener limit
+		event.node.req.setMaxListeners(15)
+		wss.setMaxListeners(15)
 	})
+
 	nitro.hooks.hook('request', event => {
 		event.context.io = event.context.io || {}
 		event.context.io.server = wss

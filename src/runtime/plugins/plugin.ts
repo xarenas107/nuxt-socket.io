@@ -4,11 +4,14 @@ import { clientOptions } from '#socket.io:config'
 type SocketIOPlugin = { socket:Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
-	const { protocol, host } = window.location
-
   await nuxt.hooks.callHook('socket.io:config',clientOptions)
-	const socket = io(`${ protocol }//${ host }`,clientOptions)
+
+  const { origin } = window.location
+	const url = origin.replace('http','ws')
+	const socket = io(url,clientOptions)
+	window.onbeforeunload = () => { socket.close() }
+
 
 	await nuxt.hooks.callHook('socket.io:done',socket)
-	nuxt.provide('socketIO', socket)
+	nuxt.provide('io', socket)
 })

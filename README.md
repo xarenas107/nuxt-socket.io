@@ -70,7 +70,7 @@ export default defineNuxtConfig({
 ```js
 // On server side
 export default defineEventHandler(event => {
-  const io = useServerSocketIo(event)
+  const io = useSocketIO(event)
   io.emit('pong','Response from server')
   return
 })
@@ -125,7 +125,7 @@ export default defineEventHandler(event => {
   const body = await readBody(event)
   
   // Update data on client
-  const socket = getSocketIO(event)
+  const socket = useSocketIO(event)
   socket.emit('message', body)})
 ```
 

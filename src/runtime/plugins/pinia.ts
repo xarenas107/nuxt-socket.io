@@ -2,12 +2,12 @@ import type { NuxtApp } from '#app'
 
 declare module 'pinia' {
   interface PiniaCustomProperties {
-    $socketIO: NuxtApp['$socketIO']
+    $io: NuxtApp['$io']
   }
 }
 
 export default defineNuxtPlugin(nuxt => {
 	extendSocketIO(socket => {
-		nuxt?.$pinia?.use(() => ({ '$socketIO':socket }))
+		(nuxt?.$pinia as any)?.use(() => ({ '$io':socket }))
 	})
 })
