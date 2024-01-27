@@ -1,3 +1,4 @@
+import { useNuxtApp } from '#app'
 import type { RuntimeNuxtHooks } from '#app'
 
 const hook = 'socket.io:config'

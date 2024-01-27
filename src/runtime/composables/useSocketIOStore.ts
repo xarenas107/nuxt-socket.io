@@ -1,4 +1,6 @@
+import { useNuxtApp } from '#app'
 import type { Socket } from "socket.io-client"
+
 
 export const useSocketIOStore = (socket?:Socket) => {
 

@@ -16,6 +16,9 @@ declare module '#app' {
   interface NuxtApp {
     $io: SocketClient
   }
+  interface ModuleRuntimeHooks {
+    'socket.io:done': (options:Socket) => Promise<void> | void
+  }
 
 }
 
