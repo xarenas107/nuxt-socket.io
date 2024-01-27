@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.6
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.5...v1.3.6)
+
+### 🩹 Fixes
+
+- Solve missing modules ([fdf6a2d](https://github.com/xarenas107/nuxt-socket.io/commit/fdf6a2d))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.3.5
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.3.4...v1.3.5)
