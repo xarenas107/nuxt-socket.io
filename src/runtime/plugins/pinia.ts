@@ -1,4 +1,5 @@
 import type { NuxtApp } from '#app'
+import { defineNuxtPlugin } from '#imports'
 
 declare module 'pinia' {
   interface PiniaCustomProperties {

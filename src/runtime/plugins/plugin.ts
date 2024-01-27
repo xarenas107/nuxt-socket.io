@@ -1,5 +1,6 @@
 import { io  } from "socket.io-client"
 import type { Socket, SocketOptions,ManagerOptions } from "socket.io-client"
+import { defineNuxtPlugin } from '#imports'
 
 export const clientOptions:Partial<SocketOptions & ManagerOptions> = { withCredentials:true }
 
