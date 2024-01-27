@@ -1,7 +1,8 @@
 import type { Socket } from "socket.io-client"
 
 export const useSocketIOStore = (socket?:Socket) => {
-  const io = socket || useSocketIO()
+
+  const io = socket || useNuxtApp().$io
 
 	// State
 	const state = reactive<State>({

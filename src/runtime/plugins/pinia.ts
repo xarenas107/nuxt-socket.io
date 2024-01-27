@@ -7,7 +7,7 @@ declare module 'pinia' {
 }
 
 export default defineNuxtPlugin(nuxt => {
-	extendSocketIO(socket => {
-		(nuxt?.$pinia as any)?.use(() => ({ '$io':socket }))
+	extendSocketIO(io => {
+		(nuxt?.$pinia as any)?.use(() => ({ '$io':io }))
 	})
 })

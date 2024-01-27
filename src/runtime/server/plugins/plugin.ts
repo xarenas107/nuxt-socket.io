@@ -22,11 +22,15 @@ export default defineNitroPlugin(nitro => {
 		const url = getRequestURL(event)
 
 		const server = socket?.server as HTTPServer
+
+    const origin = [`${ip}:${url.port}`,url.host]
+    if (runtime?.domain) origin.push(runtime.domain as string)
+
 		wss = new Server(server,{
 			transports:['websocket','polling'],
 			cors: {
 				credentials:true,
-				origin: [runtime?.domain,`${ip}:${url.port}`,url.host],
+				origin,
 			}
 		})
 
