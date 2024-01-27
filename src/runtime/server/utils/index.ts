@@ -1,1 +1,0 @@
-export { serverOptions } from './config'

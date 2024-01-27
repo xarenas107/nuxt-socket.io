@@ -42,4 +42,18 @@ export default defineNitroPlugin(nitro => {
 		event.context.io = event.context.io || {}
 		event.context.io.server = wss
 	})
+
+  nitro.hooks.hook('render:response', (_,{ event }) => {
+    const { io } = event.context
+
+
+		io.server.on('connection', socket => {
+			// Remove client socket id on disconnect
+			socket.on('disconnect',() => {
+				io?.server?.sockets?.adapter?.rooms.forEach(room => {
+					if (room.has(socket.id)) room.delete(socket.id)
+				})
+			})
+		})
+	})
 })
