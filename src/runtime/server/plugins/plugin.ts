@@ -1,5 +1,12 @@
 import { Server } from 'socket.io'
 import type { Server as HTTPServer } from 'http'
+import type { NitroApp } from 'nitropack'
+
+type NitroAppPlugin = (nitro: NitroApp) => void
+
+function defineNitroPlugin(def: NitroAppPlugin): NitroAppPlugin {
+  return def
+}
 
 let wss:Server
 

@@ -15,7 +15,7 @@ export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
 
   // Define store and save connection id
   const store = defineSocketIOStore(socket)
-  socket.on('connect',() => store.id = socket.id)
+  socket.on('connect',() => store.id = socket.id || '')
 
   nuxt.provide('io', socket)
   nuxt.provide('io:store', store)

@@ -1,6 +1,6 @@
 
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
-import type { defineSocketIOStore } from '../dist/runtime/utils'
+import type { defineSocketIOStore } from './runtime/utils'
 
 export type SocketClient = Socket
 type Options = Partial<SocketOptions & ManagerOptions>
