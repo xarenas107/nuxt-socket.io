@@ -5,6 +5,7 @@ import type { useSocketIO } from '#imports'
 import { toRefs } from '#imports'
 
 const key = 'socket.io'
+
 export const useSocketIOStore = defineStore(key,() => {
 	const io = useNuxtApp().$io
 
