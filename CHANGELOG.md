@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.5
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.4...v1.7.5)
+
+### 🩹 Fixes
+
+- Solve pinia store missing types ([a8acac5](https://github.com/xarenas107/nuxt-socket.io/commit/a8acac5))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.7.4
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.3...v1.7.4)
