@@ -3,6 +3,6 @@ export default defineNitroPlugin(nitro => {
 
   nitro.hooks.hook('request',event => {
     const url = getRequestURL(event)
-    console.log(`Request recieved on server with route: ${url?.href}`)
+    console.log(`Request recieved on server`)
   })
 })

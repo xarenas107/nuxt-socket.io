@@ -1,5 +1,4 @@
-import type { Server } from 'socket.io'
-import type { ModuleOptions } from '../../types'
+import type { Server, ServerOptions } from 'socket.io'
 
 declare module 'h3' {
 	interface SocketH3EventContext {
@@ -15,7 +14,7 @@ export interface ModuleHooks {
 }
 
 export interface ModuleRuntimeConfig {
-  'socket.io': ModuleOptions['server']
+  'socket.io': Partial<ServerOptions>
 }
 
 declare module 'nitropack' {

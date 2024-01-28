@@ -15,7 +15,7 @@ export interface ModuleRuntimeHooks {
 }
 
 export interface ModulePublicRuntimeConfig {
-  'socket.io': ModuleOptions['client']
+  'socket.io': Partial<SocketOptions & ManagerOptions>
 }
 
 declare module '#app' {
