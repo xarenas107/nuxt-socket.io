@@ -19,7 +19,7 @@ export default defineNitroPlugin(nitro => {
 		const { socket } = event.node.res as any
 
 		const server = socket?.server as HTTPServer
-    const options = { ...runtime.public?.['socket.io']?.server }
+    const options = { ...runtime?.['socket.io'] }
 		wss = new Server(server,options)
 
 		if (wss) console.info('Websocket server connected')
@@ -40,10 +40,13 @@ export default defineNitroPlugin(nitro => {
 		// Increase event listener limit
 		event.node.req.setMaxListeners(15)
 		wss.setMaxListeners(15)
+
+    await nitro.hooks.callHook('socket.io:server:done',wss)
 	})
 
 	nitro.hooks.hook('request', event => {
 		event.context.io = event.context.io || {}
 		event.context.io.server = wss
 	})
+
 })

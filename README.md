@@ -37,7 +37,7 @@ pnpm add socket.io socket.io-client @nuxt/socket.io -D
 
 ## 🦄 Usage
 
-> Add `@nuxt/socket.io` to the `modules` section of `nuxt.config.ts`.
+> Add `@xarenas107/nuxt-socket.io` to the `modules` section of `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
@@ -51,8 +51,7 @@ export default defineNuxtConfig({
 
 | Hook                     | Argument  | #Enviroment  | Description                                  |
 |--------------------------|-----------|--------------|----------------------------------------------|
-| socket.io:server:config  | options   | server       |  Called before configuring socket.io server  |
-| socket.io:config         | options   | client       | Called before configuring socket.io-client   |
+| socket.io:server:done    | server    | server       |  Called before configuring socket.io server  |
 | socket.io:done           | socket    | client       | Called after socket.io-client initialization |
 
 > Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useSocketIO()` on server side.
@@ -130,32 +129,6 @@ export default defineEventHandler(event => {
 ```
 
 That's it! You can now use @nuxt/socket.io in your Nuxt app ✨
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Generate type stubs
-npm run dev:prepare
-
-# Develop with the playground
-npm run dev
-
-# Build the playground
-npm run dev:build
-
-# Run ESLint
-npm run lint
-
-# Run Vitest
-npm run test
-npm run test:watch
-
-# Release new version
-npm run release
-```
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@xarenas107/nuxt-socket.io/latest.svg?style=flat&colorA=18181B&colorB=28CF8D

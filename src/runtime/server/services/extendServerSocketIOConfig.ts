@@ -1,9 +1,9 @@
 import type { NitroRuntimeHooks } from 'nitropack'
 
-const hook = 'socket.io:server:config'
-type ServerSocketIOConfigHook = (options:NitroRuntimeHooks[typeof hook]) => void
+const hook = 'socket.io:server:done'
+type ServerSocketIOHook = (options:NitroRuntimeHooks[typeof hook]) => void
 
-export const extendServerSocketIOConfig:ServerSocketIOConfigHook = options => {
+export const extendServerSocketIO:ServerSocketIOHook = options => {
 	const nitro = useNitroApp()
 	nitro.hooks.hook(hook, options)
 }

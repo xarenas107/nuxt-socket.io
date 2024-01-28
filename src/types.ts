@@ -2,8 +2,6 @@
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import type { ServerOptions } from 'socket.io'
 
-export type SocketClient = Socket
-
 export interface ModuleOptions {
   enabled: boolean
 	pinia:boolean
@@ -12,25 +10,16 @@ export interface ModuleOptions {
   server?: Partial<ServerOptions>
 }
 
-declare module '#app' {
-  interface NuxtApp {
-    $io: SocketClient
-  }
-  interface RuntimeNuxtHooks {
-    'socket.io:done': (options:Socket) => Promise<void> | void
-  }
-
-}
-
 export interface ModuleRuntimeHooks {
   'socket.io:done': (options:Socket) => Promise<void> | void
 }
 
-declare module '@nuxt/schema' {
-  interface NuxtConfig {
-    ['socket.io']?: Partial<ModuleOptions>
-  }
-  interface NuxtOptions {
-    ['socket.io']?: ModuleOptions
+export interface ModulePublicRuntimeConfig {
+  'socket.io': ModuleOptions['client']
+}
+
+declare module '#app' {
+  interface NuxtApp {
+    $io: Socket
   }
 }

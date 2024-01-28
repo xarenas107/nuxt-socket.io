@@ -7,7 +7,7 @@ type SocketIOPlugin = { socket:Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
   const runtime = useRuntimeConfig()
-  const options = { ...runtime.public?.['socket.io']?.client }
+  const options = { ...runtime.public?.['socket.io'] }
 	const socket = io(options)
 	if (import.meta.client) window.onbeforeunload = () => { socket.close() }
 
