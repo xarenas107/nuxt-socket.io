@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.6
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.5...v1.7.6)
+
+### 🏡 Chore
+
+- Improve type inference ([d5d78ac](https://github.com/xarenas107/nuxt-socket.io/commit/d5d78ac))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.7.5
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.4...v1.7.5)
