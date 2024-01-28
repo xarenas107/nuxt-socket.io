@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.7...v1.5.0)
+
+### 🚀 Enhancements
+
+- Add ssr support ([b73eeca](https://github.com/xarenas107/nuxt-socket.io/commit/b73eeca))
+
+### 🏡 Chore
+
+- Add default options ([a465b57](https://github.com/xarenas107/nuxt-socket.io/commit/a465b57))
+- Add default options ([dbf59c1](https://github.com/xarenas107/nuxt-socket.io/commit/dbf59c1))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.4.7
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.6...v1.4.7)
