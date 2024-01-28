@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.4
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.3...v1.7.4)
+
+### 🏡 Chore
+
+- Update npm packages ([e84f459](https://github.com/xarenas107/nuxt-socket.io/commit/e84f459))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.7.3
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.2...v1.7.3)
