@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.4.7
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.6...v1.4.7)
+
+### 🩹 Fixes
+
+- Solve missing socket.io/client hook ([74c6de9](https://github.com/xarenas107/nuxt-socket.io/commit/74c6de9))
+
+### 🏡 Chore
+
+- Types improvement ([02e34c1](https://github.com/xarenas107/nuxt-socket.io/commit/02e34c1))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.4.6
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.5...v1.4.6)
