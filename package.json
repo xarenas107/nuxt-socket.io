@@ -55,12 +55,12 @@
     "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.8.5",
+    "@nuxt/devtools": "^1.0.8",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.1",
     "@nuxt/schema": "^3.6.5",
-    "@nuxt/test-utils": "^3.7.3",
-    "@types/node": "^20.6.5",
+    "@nuxt/test-utils": "^3.11.0",
+    "@types/node": "^20.11.9",
     "changelogen": "^0.5.5",
     "eslint": "^8.50.0",
     "nuxt": "^3.9.3",
