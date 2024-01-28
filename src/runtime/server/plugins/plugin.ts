@@ -1,4 +1,6 @@
 import { Server } from 'socket.io'
+import { getRequestURL } from 'h3'
+
 import { useRuntimeConfig } from '#imports'
 import type { Server as HTTPServer } from 'http'
 import type { NitroApp } from 'nitropack'
@@ -11,7 +13,6 @@ function defineNitroPlugin(def: NitroAppPlugin): NitroAppPlugin {
 let wss:Server
 
 export default defineNitroPlugin(nitro => {
-
 	nitro.hooks.hookOnce('request', async event => {
 		const runtime = useRuntimeConfig()
 
@@ -22,13 +23,12 @@ export default defineNitroPlugin(nitro => {
     const options = { ...runtime?.['socket.io'] }
 
     // Set default options
-    const ip = getRequestIP(event,{ xForwardedFor:true })
 		const url = getRequestURL(event)
 
     options.transports = options.transports || ['websocket','polling']
 		options.cors = options.cors || {
       credentials:true,
-      origin: runtime?.domain || url.host || `${ip}:${url.port}`
+      origin: runtime?.domain || url.origin
     }
 
     // Create socket server

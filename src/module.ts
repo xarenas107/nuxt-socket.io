@@ -9,6 +9,7 @@ import {
   addImportsDir,
   addServerPlugin,
   addServerImportsDir,
+  addImports
 } from "@nuxt/kit"
 
 import { version } from "../package.json"
@@ -68,6 +69,11 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Import composables
     if (options.composables) addImportsDir(composablesDir)
+
+    addImports({
+      from: resolve(runtimeDir,options.pinia ? 'utils/store.pinia.ts' : 'utils/store.ts'),
+      name: 'useSocketIOStore',
+    })
 
     // Add server plugin
     if (options.server !== false) addServerPlugin(resolve(serverDir, "plugins/plugin"));
