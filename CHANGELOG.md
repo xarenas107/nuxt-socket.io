@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.7.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.6.0...v1.7.0)
+
+### 🚀 Enhancements
+
+- Add pinia store when module is present ([ef83682](https://github.com/xarenas107/nuxt-socket.io/commit/ef83682))
+
+### 🏡 Chore
+
+- Improve tests ([9072eec](https://github.com/xarenas107/nuxt-socket.io/commit/9072eec))
+- Improve tests ([2c9a31d](https://github.com/xarenas107/nuxt-socket.io/commit/2c9a31d))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.6.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.5.0...v1.6.0)
