@@ -8,6 +8,6 @@ describe('server', async () => {
   })
 
   it('response from api', () => {
-    $fetch('/api/ping').then(res => expect(res))
+    $fetch('/api/ping',{ method:'GET' }).then(res => expect(res))
   })
 })
