@@ -15,6 +15,7 @@ export interface ModuleHooks {
 
 export interface ModuleRuntimeConfig {
   'socket.io': Partial<ServerOptions>
+  domain: string
 }
 
 declare module 'nitropack' {

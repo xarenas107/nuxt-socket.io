@@ -2,7 +2,7 @@ import { io  } from "socket.io-client"
 import type { Socket } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 import { useSocketIOStore } from '#imports'
-
+import { getRequestProtocol } from 'h3'
 type SocketIOPlugin = { socket:Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
@@ -19,8 +19,13 @@ export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
     }
     else {
       const { headers } = nuxt.ssrContext?.event || { headers:new Map()  }
-      const origin = `${ headers.get('x-forwarded-for') }:${ headers.get('x-forwarded-port') }`
-      host = headers.get('host') || origin
+      const url = headers.get('host') || `${ headers.get('x-forwarded-for') }:${ headers.get('x-forwarded-port') }`
+
+      if (nuxt.ssrContext?.event) {
+        const protocol = getRequestProtocol(nuxt.ssrContext?.event)
+        const origin = `${protocol}:${url}`
+        host = origin.replace('http','ws')
+      }
     }
   }
 

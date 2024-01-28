@@ -59,7 +59,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
 
     // Add plugins
-    addPlugin({ src: resolve(pluginsDir, "plugin") })
+    if (options.client !== false) addPlugin({ src: resolve(pluginsDir, "plugin") })
 
     options.pinia = hasNuxtModule("@pinia/nuxt", nuxt);
     if (options.pinia) addPlugin({ src: resolve(pluginsDir, "pinia") })
@@ -68,7 +68,7 @@ export default defineNuxtModule<ModuleOptions>({
     if (options.composables) addImportsDir(composablesDir)
 
     // Add server plugin
-    addServerPlugin(resolve(serverDir, "plugins/plugin"));
+    if (options.server !== false) addServerPlugin(resolve(serverDir, "plugins/plugin"));
 
     // Import server functions
     addServerImportsDir(resolve(serverDir, "services"))

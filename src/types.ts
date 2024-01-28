@@ -6,8 +6,8 @@ export interface ModuleOptions {
   enabled: boolean
 	pinia:boolean
   composables: boolean
-  client?: Partial<SocketOptions & ManagerOptions>
-  server?: Partial<ServerOptions>
+  client?: Partial<SocketOptions & ManagerOptions> | false
+  server?: Partial<ServerOptions> | false
 }
 
 export interface ModuleRuntimeHooks {

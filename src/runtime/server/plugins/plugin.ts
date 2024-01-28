@@ -20,6 +20,14 @@ export default defineNitroPlugin(nitro => {
 
 		const server = socket?.server as HTTPServer
     const options = { ...runtime?.['socket.io'] }
+
+    const ip = getRequestIP(event,{ xForwardedFor:true })
+		const url = getRequestURL(event)
+    const origin = runtime?.domain ? [runtime.domain,`${ip}:${url.port}`,url.host] : [`${ip}:${url.port}`,url.host]
+
+    options.transports = options.transports || ['websocket','polling']
+		options.cors = options.cors || { credentials:true,origin }
+
 		wss = new Server(server,options)
 
 		if (wss) console.info('Websocket server connected')
