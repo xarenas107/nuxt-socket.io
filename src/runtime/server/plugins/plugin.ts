@@ -24,11 +24,12 @@ export default defineNitroPlugin(nitro => {
     // Set default options
     const ip = getRequestIP(event,{ xForwardedFor:true })
 		const url = getRequestURL(event)
-    const origin = [`${ip}:${url.port}`,url.host]
-    if (runtime?.domain) origin.push(runtime?.domain)
 
     options.transports = options.transports || ['websocket','polling']
-		options.cors = options.cors || { credentials:true,origin }
+		options.cors = options.cors || {
+      credentials:true,
+      origin: runtime?.domain || url.host || `${ip}:${url.port}`
+    }
 
     // Create socket server
 		wss = new Server(server,options)
