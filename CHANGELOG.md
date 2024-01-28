@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.6.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.5.0...v1.6.0)
+
+### 🚀 Enhancements
+
+- Add fetch wrapper with header x-socket ([29ffa4b](https://github.com/xarenas107/nuxt-socket.io/commit/29ffa4b))
+
+### 💅 Refactors
+
+- Code optimization ([c789eb0](https://github.com/xarenas107/nuxt-socket.io/commit/c789eb0))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.5.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.4.7...v1.5.0)
