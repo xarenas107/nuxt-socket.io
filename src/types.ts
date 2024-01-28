@@ -6,6 +6,7 @@ export interface ModuleOptions {
   enabled: boolean
 	pinia:boolean
   composables: boolean
+  header?: boolean
   client?: Partial<SocketOptions & ManagerOptions> | false
   server?: Partial<ServerOptions> | false
 }

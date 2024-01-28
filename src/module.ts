@@ -41,6 +41,7 @@ export default defineNuxtModule<ModuleOptions>({
     enabled: true,
     pinia: false,
     composables: true,
+    header:true,
     client:{},
     server:{}
   },
@@ -63,6 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     options.pinia = hasNuxtModule("@pinia/nuxt", nuxt);
     if (options.pinia) addPlugin({ src: resolve(pluginsDir, "pinia") })
+    if (options.header) addPlugin({ src: resolve(pluginsDir, "fetch") })
 
     // Import composables
     if (options.composables) addImportsDir(composablesDir)
