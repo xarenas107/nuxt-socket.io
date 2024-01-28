@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.3
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.2...v1.7.3)
+
+### 🩹 Fixes
+
+- Solve missing toRefs ([3577096](https://github.com/xarenas107/nuxt-socket.io/commit/3577096))
+
+### ❤️ Contributors
+
+- Xavier Arenas <xarenas107@gmail.com>
+
 ## v1.7.2
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.1...v1.7.2)
