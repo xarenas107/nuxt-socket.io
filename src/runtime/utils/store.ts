@@ -1,9 +1,10 @@
 import { useNuxtApp } from '#app'
-import { reactive,getCurrentInstance } from 'vue-demi'
+import { reactive, getCurrentInstance } from 'vue-demi'
 import type { useSocketIO } from '#imports'
 import type { Socket } from "socket.io-client"
 
-export const useSocketIOStore = (socket?:Socket) => {
+type UseSocketIOStore = (socket?:Socket) => State & Actions & { io:ReturnType<typeof useSocketIO> }
+export const useSocketIOStore:UseSocketIOStore = socket => {
 
   const io = socket || useNuxtApp().$io
 
