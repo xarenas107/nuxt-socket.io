@@ -2,7 +2,7 @@ import { io  } from "socket.io-client"
 import type { Socket } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 import { useSocketIOStore } from '#imports'
-import { getRequestProtocol, getRequestURL } from 'h3'
+import { getRequestURL } from 'h3'
 type SocketIOPlugin = { socket:Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
