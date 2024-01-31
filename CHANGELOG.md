@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.7.7
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.6...v1.7.7)
+
+### 🩹 Fixes
+
+- Solve wrong origin parse in ssr ([2a25107](https://github.com/xarenas107/nuxt-socket.io/commit/2a25107))
+- Update nuxt version ([d2f3042](https://github.com/xarenas107/nuxt-socket.io/commit/d2f3042))
+
+### 💅 Refactors
+
+- Code optimization ([239e41a](https://github.com/xarenas107/nuxt-socket.io/commit/239e41a))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.7.6
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.5...v1.7.6)
