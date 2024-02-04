@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useNuxtApp } from '#app'
-import { reactive, getCurrentInstance } from 'vue-demi'
+import { reactive, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue-demi'
 import type { useSocketIO } from '#imports'
 import { toRefs } from '#imports'
 
