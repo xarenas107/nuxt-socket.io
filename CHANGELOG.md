@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.8
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.7...v1.7.8)
+
+### 🩹 Fixes
+
+- Solve missing vue onMounted function ([fdcf02a](https://github.com/xarenas107/nuxt-socket.io/commit/fdcf02a))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.7.7
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.6...v1.7.7)
