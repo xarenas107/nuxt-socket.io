@@ -10,6 +10,16 @@ function defineNitroPlugin(def: NitroAppPlugin): NitroAppPlugin {
   return def
 }
 
+declare module 'h3' {
+	interface SocketH3EventContext {
+		server: Server,
+	}
+	interface H3EventContext {
+		io: SocketH3EventContext
+	}
+}
+
+
 let wss:Server
 
 export default defineNitroPlugin(nitro => {
