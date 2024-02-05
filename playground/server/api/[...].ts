@@ -2,11 +2,10 @@ import { useSocketIO } from '#imports'
 
 export default defineEventHandler(event => {
   const io = useSocketIO(event)
-  console.log('Server route test')
+  const id = io.getId()
 
-  console.log(io?.server?.sockets?.adapter?.rooms)
-  console.log(getHeader(event,'x-socket'))
+  console.log(`connected socket id: ${ id }`)
+  if (id) io.to(id,'pong', 'Response from server')
 
-  io.server.emit('pong', 'Response from server')
   return 'pong'
 })

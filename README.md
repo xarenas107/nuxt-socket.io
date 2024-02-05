@@ -69,8 +69,11 @@ export default defineNuxtConfig({
 ```js
 // On server side
 export default defineEventHandler(event => {
+  // You can access to io server through `event.context.io` or `useSocketIO().server`
   const io = useSocketIO(event)
-  io.emit('pong','Response from server')
+  
+  const id = io.getId()
+  if (id) io.to(id,'pong','Response from server')
   return
 })
 ```
@@ -123,9 +126,12 @@ declare module 'h3' {
 export default defineEventHandler(event => {
   const body = await readBody(event)
   
-  // Update data on client
+  // Send data to client
   const socket = useSocketIO(event)
-  socket.emit('message', body)})
+  socket.emit('message', body)
+
+  return null
+})
 ```
 
 That's it! You can now use @nuxt/socket.io in your Nuxt app ✨
