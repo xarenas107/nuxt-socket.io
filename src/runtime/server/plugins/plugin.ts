@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import { getRequestURL } from 'h3'
+import { getRequestURL, getHeader } from 'h3'
 
 import { useRuntimeConfig } from '#imports'
 import type { Server as HTTPServer } from 'http'
@@ -9,16 +9,6 @@ type NitroAppPlugin = (nitro: NitroApp) => void
 function defineNitroPlugin(def: NitroAppPlugin): NitroAppPlugin {
   return def
 }
-
-declare module 'h3' {
-	interface SocketH3EventContext {
-		server: Server,
-	}
-	interface H3EventContext {
-		io: SocketH3EventContext
-	}
-}
-
 
 let wss:Server
 
@@ -67,8 +57,25 @@ export default defineNitroPlugin(nitro => {
 	})
 
 	nitro.hooks.hook('request', event => {
+    const socket = getHeader(event,'x-socket')
+
 		event.context.io = event.context.io || {}
 		event.context.io.server = wss
+
+    event.context.io.self = (ev,...message) => {
+      if (!socket) return false
+      wss?.to(socket).compress(true).emit(ev, ...message,event.method)
+      return true
+    }
+
+    event.context.io.to = (uid, ev, ...message) => {
+      wss?.sockets?.adapter?.rooms.get(uid)?.forEach(id => {
+        return wss.sockets.sockets.get(id)
+          ?.compress(true).emit(ev, ...message,event.method)
+      })
+      return true
+    }
+    event.context.io.getId = () => socket
 	})
 
 })
