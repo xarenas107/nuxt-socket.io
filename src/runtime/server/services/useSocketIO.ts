@@ -1,3 +1,4 @@
-import type { H3Event, SocketH3EventContext } from 'h3'
+import type { H3Event } from 'h3'
+import type { H3SocketContext } from '../../../types'
 
-export const useSocketIO = (event:H3Event) => event.context.io as SocketH3EventContext
+export const useSocketIO = (event:H3Event) => event.context.io as H3SocketContext

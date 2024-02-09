@@ -16,8 +16,7 @@ import { version } from "../package.json"
 import defu from "defu"
 import type { ModuleOptions } from "./types"
 
-export type * from "./types";
-export type * from "./runtime/server/types";
+export * from "./types"
 
 const configKey = "socket.io";
 const logger = useLogger(`nuxt:${configKey}`);
@@ -55,7 +54,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Config
     const config = nuxt.options.runtimeConfig
-    config.public['socket.io'] = defu(config.public?.['socket.io'] || {}, options)
+    config['socket.io'] = defu(config['socket.io'] || {},{ server:options.server })
+    config.public['socket.io'] = defu(config.public?.['socket.io'] || {}, { client:options.client })
 
     // Transpile
     nuxt.options.build.transpile.push(runtimeDir)
