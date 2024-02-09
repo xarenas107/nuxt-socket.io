@@ -21,19 +21,11 @@ My new Nuxt module for doing amazing things.
 - 🦾 **Type strong**: Written in typescript
 <!-- - 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector -->
 
-<!-- ## 📦 Install
-
-> Requires `socket.io` and  `socket.io-client`.
+## 📦 Install
 
 ```bash
-npm i socket.io socket.io-client @nuxt/socket.io -D 
-
-# yarn 
-yarn add socket.io socket.io-client @nuxt/socket.io -D
-
-# pnpm 
-pnpm add socket.io socket.io-client @nuxt/socket.io -D
-``` -->
+npm i @xarenas107/nuxt-socket.io -D 
+```
 
 ## 🦄 Usage
 

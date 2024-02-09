@@ -6,7 +6,7 @@
   },
   "private": false,
   "version": "1.7.8",
-  "description": "Nux module for socket.io",
+  "description": "Nuxt module for socket.io",
   "keywords": [
     "websocket",
     "socket.io",
@@ -39,7 +39,7 @@
   },
   "scripts": {
     "prepack": "nuxt-module-build",
-    "build": "npx nuxi build-module",
+    "build": "nuxi build-module",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
@@ -63,7 +63,7 @@
     "@types/node": "^20.11.9",
     "changelogen": "^0.5.5",
     "eslint": "^8.50.0",
-    "nuxt": "^3.10.0",
+    "nuxt": "^3.10.1",
     "pinia": "^2.1.7",
     "vitest": "^1.2.2"
   },
