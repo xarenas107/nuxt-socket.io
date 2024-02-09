@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.8.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.8...v1.8.0)
+
+### 🚀 Enhancements
+
+- Add custom functions getId(), to(), self() to server context ([b695195](https://github.com/xarenas107/nuxt-socket.io/commit/b695195))
+
+### 🩹 Fixes
+
+- Solve useSocketIO server missing types ([93b1572](https://github.com/xarenas107/nuxt-socket.io/commit/93b1572))
+
+### 🏡 Chore
+
+- Update documentation ([96f70cf](https://github.com/xarenas107/nuxt-socket.io/commit/96f70cf))
+- Update npm packages ([63f1f5f](https://github.com/xarenas107/nuxt-socket.io/commit/63f1f5f))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.7.8
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.7...v1.7.8)
