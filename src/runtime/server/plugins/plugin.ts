@@ -33,7 +33,6 @@ export default defineNitroPlugin(nitro => {
       origin: domain || url.origin
     }
 
-    console.log(runtime)
     // Create socket server
 		wss = new Server(server,options)
 
