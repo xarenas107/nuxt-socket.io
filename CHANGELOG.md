@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.5
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.4...v1.8.5)
+
+### 🏡 Chore
+
+- Split server imports ([a69d94d](https://github.com/xarenas107/nuxt-socket.io/commit/a69d94d))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.4
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.3...v1.8.4)
