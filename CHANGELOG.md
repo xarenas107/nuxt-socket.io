@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.3
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.2...v1.8.3)
+
+### 💅 Refactors
+
+- Code optimization ([20ff4d5](https://github.com/xarenas107/nuxt-socket.io/commit/20ff4d5))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.2
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.1...v1.8.2)
