@@ -1,7 +1,6 @@
 
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import type { ServerOptions, Server } from 'socket.io'
-import type { H3ESocket } from './runtime/server/services/useSocketIO'
 
 export interface ModuleOptions {
   enabled: boolean
@@ -25,7 +24,6 @@ export interface ModuleRuntimeConfig {
   domain: string
 }
 
-
 declare module '#app' {
   interface NuxtApp {
     $io: Socket
@@ -34,13 +32,6 @@ declare module '#app' {
 
 export interface ModuleHooks {
   'socket.io:server:done': (options:Server) => Promise<void> | void
-}
-
-declare module 'h3' {
-  type SocketH3EventContext = H3ESocket
-	interface H3EventContext {
-		io: SocketH3EventContext
-	}
 }
 
 declare module 'nitropack' {
