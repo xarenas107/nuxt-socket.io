@@ -7,8 +7,8 @@ import {
   getNuxtVersion,
   addPlugin,
   addImportsDir,
+  addServerImports,
   addServerPlugin,
-  addServerImportsDir,
   addImports
 } from "@nuxt/kit"
 
@@ -77,7 +77,17 @@ export default defineNuxtModule<ModuleOptions>({
     if (options.server !== false) addServerPlugin(resolve(serverDir, "plugins/plugin"));
 
     // Import server functions
-    addServerImportsDir(resolve(serverDir, "services"))
+    // addServerImportsDir(resolve(serverDir, "services"))
+    addServerImports([
+      {
+        name:'useSocketIO',
+        from:resolve(serverDir, "services/useSocketIO"),
+      },
+      {
+        name:'extendServerSocketIO',
+        from:resolve(serverDir, "services/extendServerSocketIO"),
+      }
+    ])
 
     logger.success("Socket.io connected");
   },
