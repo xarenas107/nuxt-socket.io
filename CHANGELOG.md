@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.8.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.0...v1.8.1)
+
+### 🩹 Fixes
+
+- Solve useSocketIO server missing types ([dee2c6b](https://github.com/xarenas107/nuxt-socket.io/commit/dee2c6b))
+- Solve useSocketIO server missing types ([e500846](https://github.com/xarenas107/nuxt-socket.io/commit/e500846))
+
+### 🏡 Chore
+
+- Update commands ([27ffb8b](https://github.com/xarenas107/nuxt-socket.io/commit/27ffb8b))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.7.8...v1.8.0)
