@@ -1,6 +1,7 @@
 
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import type { ServerOptions, Server } from 'socket.io'
+import type { H3ESocket } from './runtime/server/services/useSocketIO'
 
 export interface ModuleOptions {
   enabled: boolean
@@ -36,7 +37,7 @@ export interface ModuleHooks {
 }
 
 declare module 'h3' {
-  type SocketH3EventContext = H3SocketContext
+  type SocketH3EventContext = H3ESocket
 	interface H3EventContext {
 		io: SocketH3EventContext
 	}
@@ -48,9 +49,3 @@ declare module 'nitropack' {
   }
 }
 
-export interface H3SocketContext {
-  server: Server,
-  self: Server['emit']
-  to: (uid:string,ev:string,...message:any[]) => boolean
-  getId: () => string | undefined
-}
