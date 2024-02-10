@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.6
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.5...v1.8.6)
+
+### 🩹 Fixes
+
+- Solve minor bugs ([c9a5b38](https://github.com/xarenas107/nuxt-socket.io/commit/c9a5b38))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.5
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.4...v1.8.5)
