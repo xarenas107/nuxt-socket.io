@@ -27,7 +27,6 @@ const pluginsDir = resolve(runtimeDir, "plugins");
 const composablesDir = resolve(runtimeDir, "composables");
 const serverDir = resolve(runtimeDir, "server");
 
-
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: `@nuxt/${configKey}`,
@@ -54,8 +53,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Config
     const config = nuxt.options.runtimeConfig
-    config['socket.io'] = defu(config['socket.io'] || {},{ server:options.server })
-    config.public['socket.io'] = defu(config.public?.['socket.io'] || {}, { client:options.client })
+    config['socket.io'] = defu(config['socket.io'] || {},options.server)
+    config.public['socket.io'] = defu(config.public?.['socket.io'] || {},options.client)
 
     // Transpile
     nuxt.options.build.transpile.push(runtimeDir)

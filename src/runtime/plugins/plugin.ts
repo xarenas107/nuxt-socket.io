@@ -1,5 +1,5 @@
 import { io  } from "socket.io-client"
-import type { Socket } from "socket.io-client"
+import type { Socket, SocketOptions, ManagerOptions } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 import { useSocketIOStore } from '#imports'
 import { getRequestURL } from 'h3'
@@ -8,7 +8,7 @@ type SocketIOPlugin = { socket:Socket }
 export default defineNuxtPlugin<SocketIOPlugin>(async nuxt => {
   const runtime = useRuntimeConfig()
 
-  const options = { ...runtime.public?.['socket.io'] }
+  const options = { ...runtime.public?.['socket.io'] } as Partial<SocketOptions & ManagerOptions>
   let host = options.host || ''
 
   if (!options?.host) {
