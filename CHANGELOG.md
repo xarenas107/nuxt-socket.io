@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.8.7
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.6...v1.8.7)
+
+### 🩹 Fixes
+
+- Solve wrong runtime config defaults ([90d75e6](https://github.com/xarenas107/nuxt-socket.io/commit/90d75e6))
+- Solve wrong runtime config defaults ([40d390f](https://github.com/xarenas107/nuxt-socket.io/commit/40d390f))
+
+### 💅 Refactors
+
+- Remove unnused code ([3a156a6](https://github.com/xarenas107/nuxt-socket.io/commit/3a156a6))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.6
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.5...v1.8.6)
