@@ -76,7 +76,6 @@ export default defineNuxtModule<ModuleOptions>({
     if (options.server !== false) addServerPlugin(resolve(serverDir, "plugins/plugin"));
 
     // Import server functions
-    // addServerImportsDir(resolve(serverDir, "services"))
     addServerImports([
       {
         name:'useSocketIO',
