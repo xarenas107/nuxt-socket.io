@@ -42,7 +42,9 @@ export default defineNuxtModule<ModuleOptions>({
     composables: true,
     header:true,
     client:{},
-    server:{}
+    server:{
+      transports:['websocket','polling'],
+    }
   },
   async setup(options, nuxt) {
     if (!options.enabled) return;

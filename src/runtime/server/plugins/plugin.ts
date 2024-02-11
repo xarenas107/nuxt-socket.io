@@ -27,7 +27,6 @@ export default defineNitroPlugin(nitro => {
 		const url = getRequestURL(event)
     const domain = runtime?.domain as string
 
-    options.transports = options.transports || ['websocket','polling']
 		options.cors = options.cors || {
       credentials:true,
       origin: domain || url.origin
