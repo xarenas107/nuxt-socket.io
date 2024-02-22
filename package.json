@@ -43,7 +43,7 @@
     "build": "nuxi build-module",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxi prepare playground",
     "release": "npm run lint && npm run prepack && changelogen --release && npm publish --access public && git push --follow-tags",
     "lint": "eslint . --fix",
     "test": "vitest run",
@@ -65,7 +65,7 @@
     "@types/node": "^20.11.9",
     "changelogen": "^0.5.5",
     "eslint": "^8.50.0",
-    "nuxt": "^3.10.1",
+    "nuxt": "^3.10.2",
     "pinia": "^2.1.7",
     "vitest": "^1.2.2"
   },
