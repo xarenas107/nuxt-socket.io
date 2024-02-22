@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.8.8
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.7...v1.8.8)
+
+### 💅 Refactors
+
+- Code optimization ([c9d259b](https://github.com/xarenas107/nuxt-socket.io/commit/c9d259b))
+
+### 🏡 Chore
+
+- Update npm packages ([7107444](https://github.com/xarenas107/nuxt-socket.io/commit/7107444))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.7
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.6...v1.8.7)
