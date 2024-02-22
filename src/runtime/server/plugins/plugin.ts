@@ -1,11 +1,12 @@
 import { Server } from 'socket.io'
-import { getRequestURL, getHeader } from 'h3'
-
+import { getRequestURL, getHeader, H3Event } from 'h3'
+import type { SocketH3EventContext } from 'h3'
 import { useRuntimeConfig } from '#imports'
 import type { Server as HTTPServer } from 'http'
 import type { NitroApp } from 'nitropack'
 import type { ServerOptions } from 'socket.io'
 type NitroAppPlugin = (nitro: NitroApp) => void
+
 
 function defineNitroPlugin(def: NitroAppPlugin): NitroAppPlugin {
   return def
@@ -49,34 +50,39 @@ export default defineNitroPlugin(nitro => {
 		nitro.hooks.hook('close',() => wss.close())
     await nitro.hooks.callHook('socket.io:server:done',wss)
 
-
 		// Increase event listener limit
 		event.node.req.setMaxListeners(15)
 		wss.setMaxListeners(15)
 
     await nitro.hooks.callHook('socket.io:server:done',wss)
+
+    defineSocketIOContext(event)
 	})
 
-	nitro.hooks.hook('request', event => {
-    const socket = getHeader(event,'x-socket')
+	nitro.hooks.hook('request', event => { defineSocketIOContext(event) })
 
-		event.context.io = event.context.io || {}
-		event.context.io.server = wss
+})
 
+function defineSocketIOContext(event:H3Event) {
+  const socket = getHeader(event,'x-socket')
+
+  event.context.io = event.context.io || {} as SocketH3EventContext
+  event.context.io.server = wss
+
+  event.context.io.to = (uid, ev, ...message) => {
+    wss?.sockets?.adapter?.rooms.get(uid)?.forEach(id => {
+      return wss.sockets.sockets.get(id)
+        ?.compress(true).emit(ev, ...message,event.method)
+    })
+    return true
+  }
+
+  if (socket) {
     event.context.io.self = (ev,...message) => {
       if (!socket) return false
       wss?.to(socket).compress(true).emit(ev, ...message,event.method)
       return true
     }
-
-    event.context.io.to = (uid, ev, ...message) => {
-      wss?.sockets?.adapter?.rooms.get(uid)?.forEach(id => {
-        return wss.sockets.sockets.get(id)
-          ?.compress(true).emit(ev, ...message,event.method)
-      })
-      return true
-    }
     event.context.io.getId = () => socket
-	})
-
-})
+  }
+}

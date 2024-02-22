@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
-import { useNuxtApp } from '#app'
 import { reactive, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue-demi'
-import type { useSocketIO } from '#imports'
+import { useSocketIO } from '#imports'
 import { toRefs } from '#imports'
 
 const key = 'socket.io'
 
 export const useSocketIOStore = defineStore(key,() => {
-	const io = useNuxtApp().$io
+	const io = useSocketIO()
 
 	// State
 	const state = reactive<State>({

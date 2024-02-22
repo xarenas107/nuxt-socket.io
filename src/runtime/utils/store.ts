@@ -1,12 +1,11 @@
-import { useNuxtApp } from '#app'
 import { reactive, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue-demi'
-import type { useSocketIO } from '#imports'
+import { useSocketIO } from '#imports'
 import type { Socket } from "socket.io-client"
 
 type UseSocketIOStore = (socket?:Socket) => State & Actions & { io:ReturnType<typeof useSocketIO> }
 export const useSocketIOStore:UseSocketIOStore = socket => {
 
-  const io = socket || useNuxtApp().$io
+  const io = socket || useSocketIO()
 
 	// State
 	const state = reactive<State>({

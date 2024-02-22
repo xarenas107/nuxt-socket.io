@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue-demi'
+import { ref } from 'vue-demi'
 import { useSocketIOStore } from '#imports'
 
 const response = ref('Request from client')
