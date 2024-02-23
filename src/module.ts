@@ -9,7 +9,7 @@ import {
   addImportsDir,
   addServerImports,
   addServerPlugin,
-  addImports
+  addImports,
 } from "@nuxt/kit"
 
 import { version } from "../package.json"
@@ -43,7 +43,7 @@ export default defineNuxtModule<ModuleOptions>({
     header:true,
     client:{},
     server:{
-      transports:['websocket','polling'],
+      transports:["polling", "websocket"]
     }
   },
   async setup(options, nuxt) {
@@ -59,7 +59,9 @@ export default defineNuxtModule<ModuleOptions>({
     config.public['socket.io'] = defu(config.public?.['socket.io'] || {},options.client)
 
     // Transpile
-    nuxt.options.build.transpile.push(runtimeDir)
+    // nuxt.options.build.transpile.push(runtimeDir)
+    // nuxt.options.build.transpile.push(configKey)
+    nuxt.options.build.transpile.push(`${configKey}-client`)
 
     // Add plugins
     if (options.client !== false) addPlugin({ src: resolve(pluginsDir, "plugin") })
