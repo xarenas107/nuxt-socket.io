@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.9
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.8...v1.8.9)
+
+### 🏡 Chore
+
+- Transpile socket.io-client dependence ([1246dc7](https://github.com/xarenas107/nuxt-socket.io/commit/1246dc7))
+
+### ❤️ Contributors
+
+- Xavier
+
 ## v1.8.8
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.7...v1.8.8)
