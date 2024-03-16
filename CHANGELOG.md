@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.8.10
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.9...v1.8.10)
+
+### 🩹 Fixes
+
+- Solve missing hook `socket.io:done` ([67aba1d](https://github.com/xarenas107/nuxt-socket.io/commit/67aba1d))
+- Solve test fails ([b3491cb](https://github.com/xarenas107/nuxt-socket.io/commit/b3491cb))
+
+### 🏡 Chore
+
+- Update packages ([ca7f593](https://github.com/xarenas107/nuxt-socket.io/commit/ca7f593))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v1.8.9
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.8...v1.8.9)
