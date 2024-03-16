@@ -33,6 +33,15 @@ declare module '#app' {
   }
 }
 
+declare module '@nuxt/schema' {
+  interface RuntimeConfig {
+    'socket.io': Partial<ServerOptions>
+  }
+  interface PublicRuntimeConfig {
+    'socket.io': Partial<SocketOptions & ManagerOptions>
+  }
+}
+
 export interface ModuleHooks {
   'socket.io:server:done': (options:Server) => Promise<void> | void
 }
