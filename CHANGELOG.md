@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.11
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.10...v1.8.11)
+
+### 🩹 Fixes
+
+- Try to solve missing types ([194bba7](https://github.com/xarenas107/nuxt-socket.io/commit/194bba7))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v1.8.10
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.9...v1.8.10)
