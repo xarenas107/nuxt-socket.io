@@ -12,11 +12,10 @@ import {
   addImports,
 } from "@nuxt/kit"
 
-import { version } from "../package.json"
 import defu from "defu"
 import type { ModuleOptions } from "./types"
 
-export * from "./types"
+export type * from "./types"
 
 const configKey = "socket.io";
 const logger = useLogger(`nuxt:${configKey}`);
@@ -34,7 +33,6 @@ export default defineNuxtModule<ModuleOptions>({
     compatibility: {
       nuxt: "^3.0.0",
     },
-    version,
   },
   defaults: {
     enabled: true,

@@ -1,6 +1,6 @@
 import { io  } from "socket.io-client"
 import type { Socket, SocketOptions, ManagerOptions } from "socket.io-client"
-import { defineNuxtPlugin, useRuntimeConfig,useSocketIOStore } from '#imports'
+import { defineNuxtPlugin, useRuntimeConfig,useSocketIOStore, createError } from '#imports'
 import { getRequestURL } from 'h3'
 type SocketIOPlugin = { socket:Socket }
 
