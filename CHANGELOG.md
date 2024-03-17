@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.13
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.12...v1.8.13)
+
+### 🏡 Chore
+
+- Update packages ([8064a61](https://github.com/xarenas107/nuxt-socket.io/commit/8064a61))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v1.8.12
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.11...v1.8.12)
