@@ -41,3 +41,12 @@ export default defineNuxtPlugin<SocketIOPlugin>({
     })
   }
 })
+
+declare module '#app' {
+  interface NuxtApp {
+    $io: Socket
+  }
+  interface RuntimeNuxtHooks {
+    'socket.io:done': (options:Socket) => Promise<void> | void
+  }
+}

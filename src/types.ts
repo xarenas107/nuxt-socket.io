@@ -24,23 +24,23 @@ export interface ModuleRuntimeConfig {
   domain: string
 }
 
-declare module '#app' {
-  interface NuxtApp {
-    $io: Socket
-  }
-  interface RuntimeNuxtHooks {
-    'socket.io:done': (options:Socket) => Promise<void> | void
-  }
-}
+// declare module '#app' {
+//   interface NuxtApp {
+//     $io: Socket
+//   }
+//   interface RuntimeNuxtHooks {
+//     'socket.io:done': (options:Socket) => Promise<void> | void
+//   }
+// }
 
-declare module '@nuxt/schema' {
-  interface RuntimeConfig {
-    'socket.io': Partial<ServerOptions>
-  }
-  interface PublicRuntimeConfig {
-    'socket.io': Partial<SocketOptions & ManagerOptions>
-  }
-}
+// declare module '@nuxt/schema' {
+//   interface RuntimeConfig {
+//     'socket.io': Partial<ServerOptions>
+//   }
+//   interface PublicRuntimeConfig {
+//     'socket.io': Partial<SocketOptions & ManagerOptions>
+//   }
+// }
 
 export interface ModuleHooks {
   'socket.io:server:done': (options:Server) => Promise<void> | void
