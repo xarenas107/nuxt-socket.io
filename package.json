@@ -5,7 +5,7 @@
     "email": "xarenas107@gmail.com"
   },
   "private": false,
-  "version": "1.8.11",
+  "version": "1.8.12",
   "description": "Nuxt module for socket.io",
   "keywords": [
     "websocket",
@@ -65,7 +65,7 @@
     "@types/node": "^20.11.9",
     "changelogen": "^0.5.5",
     "eslint": "^8.50.0",
-    "nuxt": "^3.10.3",
+    "nuxt": "^3.11.0",
     "pinia": "^2.1.7",
     "vitest": "^1.2.2"
   },
