@@ -7,7 +7,6 @@ const { execute } = useFetch('api/ping',{ immediate:false })
 
 const io = useSocketIOStore()
 io.on('pong',msg => response.value = msg)
-
 </script>
 
 <template>
