@@ -12,7 +12,6 @@ import {
   addImports,
 } from "@nuxt/kit"
 
-import defu from "defu"
 import type { ModuleOptions } from "./types"
 
 export type * from "./types"
@@ -52,6 +51,7 @@ export default defineNuxtModule<ModuleOptions>({
 
 
     // Config
+    const { defu } = await import('defu')
     const config = nuxt.options.runtimeConfig
     config['socket.io'] = defu(config['socket.io'] || {},options.server)
     config.public['socket.io'] = defu(config.public?.['socket.io'] || {},options.client)
