@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
-import { reactive, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue-demi'
-import { useSocketIO } from '#imports'
-import { toRefs } from '#imports'
+import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount } from '#imports'
+import { getUid } from './parseNameFromInstance'
+
+import type { SocketIOStoreActions, SocketIOStoreState } from './types'
 
 const key = 'socket.io'
 
@@ -9,13 +10,13 @@ export const useSocketIOStore = defineStore(key,() => {
 	const io = useSocketIO()
 
 	// State
-	const state = reactive<State>({
+	const state = reactive<SocketIOStoreState>({
 		id: io.id ?? '',
 		value: new Map()
 	})
 
 	// Actions
-	const actions:Actions = {
+	const actions:SocketIOStoreActions = {
 		on: (event,listener, component) => {
 			component = getUid(event, component)
 			if (!state.value.has(event)) state.value.set(event,new Set())
@@ -55,27 +56,3 @@ export const useSocketIOStore = defineStore(key,() => {
 		...actions
 	}
 })
-
-const parseNameFromInstance = (event:string) => {
-	const instance = getCurrentInstance()
-	const regex = /.*(?:components|pages)\/|\.vue$|\/index.vue$/g
-	const raw = instance?.type?.__file?.replace(regex, "")
-	const _component = raw ? raw?.replaceAll('/',':') : instance?.uid?.toString() || event
-
-	return _component
-}
-const getUid = (event:string, component?:string) => {
-	return component || parseNameFromInstance(event)
-}
-
-interface State {
-	id:string
-	value:Map<string,Set<string>>
-}
-
-interface Actions {
-	setup(event: string, listener:(...args:any[]) => void,component?:string):void
-	on(event: string, listener:(...args:any[]) => void,component?:string):() => void
-	off(event: string):void
-	emit(event:string,...args:any[]):ReturnType<typeof useSocketIO>
-}
