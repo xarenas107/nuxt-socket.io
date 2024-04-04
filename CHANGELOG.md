@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v1.8.14
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.13...v1.8.14)
+
+### 🩹 Fixes
+
+- Solve missing pinia store types ([cffd362](https://github.com/xarenas107/nuxt-socket.io/commit/cffd362))
+
+### 💅 Refactors
+
+- Remove duplicated code ([cc9f235](https://github.com/xarenas107/nuxt-socket.io/commit/cc9f235))
+- Minor optimization ([1a79bb2](https://github.com/xarenas107/nuxt-socket.io/commit/1a79bb2))
+- Minor optimization ([066bfda](https://github.com/xarenas107/nuxt-socket.io/commit/066bfda))
+
+### 🏡 Chore
+
+- Update packages ([34a5ae6](https://github.com/xarenas107/nuxt-socket.io/commit/34a5ae6))
+- Set `pinia:true` as  default ([9074cb0](https://github.com/xarenas107/nuxt-socket.io/commit/9074cb0))
+- Add `pinia/nuxt` in playground ([b935af3](https://github.com/xarenas107/nuxt-socket.io/commit/b935af3))
+- Externalize `defu` ([004f645](https://github.com/xarenas107/nuxt-socket.io/commit/004f645))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v1.8.13
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.12...v1.8.13)
