@@ -1,10 +1,12 @@
-import { defineStore } from 'pinia'
-import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount } from '#imports'
+import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount, defineStore } from '#imports'
 import { getUid } from './parseNameFromInstance'
 
+import type { StoreDefinition, _UnwrapAll } from 'pinia'
 import type { SocketIOStoreActions, SocketIOStoreState } from './types'
 
 const key = 'socket.io'
+
+type Store = StoreDefinition<'soket.io',SocketIOStoreState,{},SocketIOStoreActions>
 
 export const useSocketIOStore = defineStore(key,() => {
 	const io = useSocketIO()
@@ -55,4 +57,4 @@ export const useSocketIOStore = defineStore(key,() => {
 		...toRefs(state),
 		...actions
 	}
-})
+}) as Store
