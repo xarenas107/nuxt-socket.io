@@ -34,7 +34,8 @@
   "build": {
     "externals": [
       "socket.io-client",
-      "socket.io"
+      "socket.io",
+      "defu"
     ]
   },
   "scripts": {
