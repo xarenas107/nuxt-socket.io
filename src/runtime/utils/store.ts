@@ -21,32 +21,32 @@ export const useSocketIOStore = (socket?:Socket) => {
 	const actions:SocketIOStoreActions = {
 		on: (event,listener, component) => {
 			component = getUid(event, component)
-			if (!store.value.has(event)) store.value.set(event,new Set())
+			if (!state.value.has(event)) state.value.set(event,new Set())
 
 			const socket = io.on(event,listener)
-			store.value?.get(event)?.add(component)
+			state.value?.get(event)?.add(component)
 
 			return () => {
 				socket.off(event,listener)
-				if (component) store.value?.get(event)?.delete(component)
+				if (component) state.value?.get(event)?.delete(component)
 			}
 		},
 		off: event => {
 			io.off(event)
-			store.value.delete(event)
+			state.value.delete(event)
 		},
 		setup: (event,listener, component) => {
 			component = getUid(event, component)
-			if (!store.value.has(event)) store.value.set(event,new Set())
+			if (!state.value.has(event)) state.value.set(event,new Set())
 
 			onMounted(() => {
 				io.on(event,listener)
-				if (component) store.value?.get(event)?.add(component)
+				if (component) state.value?.get(event)?.add(component)
 			})
 			onBeforeUnmount(() => {
 				io.off(event,listener)
 
-				const name = store.value.get(event)
+				const name = state.value.get(event)
 				if (component) name?.delete(component)
 			})
 		},
