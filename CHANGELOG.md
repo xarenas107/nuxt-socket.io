@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.8.15
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.14...v1.8.15)
+
+### 🔥 Performance
+
+- **eslint:** Use `eslint` flat config ([c02af86](https://github.com/xarenas107/nuxt-socket.io/commit/c02af86))
+
+### 💅 Refactors
+
+- Minor optimzations ([b247c71](https://github.com/xarenas107/nuxt-socket.io/commit/b247c71))
+
+### 🏡 Chore
+
+- **node:** Update packages ([b855aaa](https://github.com/xarenas107/nuxt-socket.io/commit/b855aaa))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v1.8.14
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.13...v1.8.14)
