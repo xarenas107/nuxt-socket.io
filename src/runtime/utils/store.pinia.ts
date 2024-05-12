@@ -6,7 +6,7 @@ import type { SocketIOStoreActions, SocketIOStoreState } from './types'
 
 const key = 'socket.io'
 
-type Store = StoreDefinition<'soket.io',SocketIOStoreState,{},SocketIOStoreActions>
+type Store = StoreDefinition<'soket.io',SocketIOStoreState,object,SocketIOStoreActions>
 
 export const useSocketIOStore = defineStore(key,() => {
 	const io = useSocketIO()

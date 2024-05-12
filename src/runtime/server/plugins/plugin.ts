@@ -1,8 +1,8 @@
 import { Server } from 'socket.io'
-import { getRequestURL, getHeader, H3Event } from 'h3'
-import type { SocketH3EventContext } from 'h3'
+import { getRequestURL, getHeader } from 'h3'
+import type { SocketH3EventContext , H3Event } from 'h3'
 import { useRuntimeConfig } from '#imports'
-import type { Server as HTTPServer } from 'http'
+import type { Server as HTTPServer } from 'node:http'
 import type { NitroApp } from 'nitropack'
 import type { ServerOptions } from 'socket.io'
 type NitroAppPlugin = (nitro: NitroApp) => void
