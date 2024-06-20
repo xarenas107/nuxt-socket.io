@@ -1,15 +1,21 @@
-import { describe, it, expect, } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { fileURLToPath } from 'node:url'
 import { setup, $fetch } from '@nuxt/test-utils'
 
-describe('server', async () => {
+describe('socket.io', async () => {
   await setup({
     rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
+    dev: true,
+    nuxtConfig: {
+      test:true
+    }
   })
 
-  it('response from server', () => {
-    $fetch('/api/ping',{ method:'GET' })
-      .then(res => expect(res))
-      .catch(err => err)
+  it('response recieved', async () => {
+    await $fetch('/',{
+      onResponse({ response }) {
+        return expect(response.ok).toBe(true)
+      }
+    })
   })
 })
