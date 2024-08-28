@@ -13,13 +13,18 @@ export const useSocketIOStore = (socket?:Socket) => {
 
   const state = reactive({
     id: io?.id ?? '',
-    value: store
+    value: store,
+    transport: 'N/A',
+    status: {
+      pending: false,
+      connected: false
+    }
   })
 
 	// Actions
 
 	const actions:SocketIOStoreActions = {
-		on: (event,listener, component) => {
+		on: (event, listener, component) => {
 			component = getUid(event, component)
 			if (!state.value.has(event)) state.value.set(event,new Set())
 
@@ -27,7 +32,7 @@ export const useSocketIOStore = (socket?:Socket) => {
 			state.value?.get(event)?.add(component)
 
 			return () => {
-				socket.off(event,listener)
+				socket.off(event, listener)
 				if (component) state.value?.get(event)?.delete(component)
 			}
 		},
@@ -35,22 +40,32 @@ export const useSocketIOStore = (socket?:Socket) => {
 			io.off(event)
 			state.value.delete(event)
 		},
-		setup: (event,listener, component) => {
+		setup: (event, listener, component) => {
 			component = getUid(event, component)
 			if (!state.value.has(event)) state.value.set(event,new Set())
 
 			onMounted(() => {
-				io.on(event,listener)
+				io.on(event, listener)
 				if (component) state.value?.get(event)?.add(component)
 			})
 			onBeforeUnmount(() => {
-				io.off(event,listener)
+				io.off(event, listener)
 
 				const name = state.value.get(event)
 				if (component) name?.delete(component)
 			})
+
+      return () => {
+				io.off(event, listener)
+				if (component) state.value?.get(event)?.delete(component)
+			}
 		},
-		emit: (event,...args) => io.emit(event, ...args),
+		emit: (event,...args) => {
+      state.status.pending = true
+      return io.emit(event, ...args, () => {
+        state.status.pending = false
+      })
+    },
 	}
 
 	return {
