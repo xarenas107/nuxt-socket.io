@@ -24,5 +24,8 @@ io.on('pong',msg => response.value = msg)
     <div :style="{ paddingLeft: '1rem' }">
       Connected with id: {{ io.id }}
     </div>
+    <div :style="{ paddingLeft: '1rem' }">
+      Transport: {{ io.transport }}
+    </div>
   </client-only>
 </template>
