@@ -1,6 +1,37 @@
 # Changelog
 
 
+## v2.0.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.15...v2.0.0)
+
+### 🚀 Enhancements
+
+- **store:** Add connection status ([ed83f0f](https://github.com/xarenas107/nuxt-socket.io/commit/ed83f0f))
+
+### 🩹 Fixes
+
+- **test:** Solve wrong test responses ([a42a6c4](https://github.com/xarenas107/nuxt-socket.io/commit/a42a6c4))
+
+### 💅 Refactors
+
+- Remove unnused methods ([141be02](https://github.com/xarenas107/nuxt-socket.io/commit/141be02))
+
+### 🏡 Chore
+
+- Update packages ([34e8b75](https://github.com/xarenas107/nuxt-socket.io/commit/34e8b75))
+- ⚠️  Use `socket.io` recomended integration for nuxt ([e13a0f1](https://github.com/xarenas107/nuxt-socket.io/commit/e13a0f1))
+- **playground:** Show `transport` & `id` ([799e85b](https://github.com/xarenas107/nuxt-socket.io/commit/799e85b))
+- Use cookie as default id storage and header as fallback ([95d3ed9](https://github.com/xarenas107/nuxt-socket.io/commit/95d3ed9))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Use `socket.io` recomended integration for nuxt ([e13a0f1](https://github.com/xarenas107/nuxt-socket.io/commit/e13a0f1))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v1.8.15
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.14...v1.8.15)
