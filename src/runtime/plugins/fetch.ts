@@ -13,7 +13,7 @@ export default defineNuxtPlugin({
 
         options.headers = {
           ...options.headers,
-          'x-socket': socket?.id ?? '',
+          'io': socket?.id ?? '',
         }
       }
     }

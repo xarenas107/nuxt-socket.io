@@ -1,9 +1,9 @@
 import { Server } from 'socket.io'
 import { Server as Engine } from "engine.io"
-import { defineEventHandler, getHeader } from 'h3'
+import { defineEventHandler, getCookie, getHeader } from 'h3'
+import { serialize } from "cookie";
 import { useRuntimeConfig } from '#imports'
 
-import type { SocketH3EventContext } from 'h3'
 import type { NitroApp } from 'nitropack'
 import type { ServerOptions } from 'socket.io'
 type NitroAppPlugin = (nitro: NitroApp) => void
@@ -15,14 +15,30 @@ export default defineNitroPlugin(async nitro => {
   const options = { ...runtime['socket.io'] } as Partial<ServerOptions>
   const { path = '/socket.io' } = options
 
-  const engine = new Engine()
+  const { cookie } = runtime.public['socket.io']
+
+  // Avoid cookie overlaping
+  if (options.cookie) {
+    const suffix = 'client'
+    if (options.cookie === true) cookie.name = `${cookie.name}:${suffix}`
+    else if (options.cookie.name === cookie.name) {
+      cookie.name = `${cookie.name}:${suffix}`
+    }
+  }
+
+  const engine = new Engine(options)
   const io = new Server(options)
   if (io) console.info('Websocket server initialized')
 
-  // io.setMaxListeners(15)
   io.bind(engine)
 
-  await nitro.hooks.callHook('socket.io:server:done',io)
+  await nitro.hooks.callHook('socket.io:server:done', io)
+
+  io.on('connection', (socket) => {
+    engine.once('headers', headers => {
+      headers['set-cookie'] = serialize(cookie.name, socket.id, cookie)
+    })
+  })
 
   nitro.router.use(path, defineEventHandler({
     handler(event) {
@@ -46,24 +62,24 @@ export default defineNitroPlugin(async nitro => {
 
   // Set websocket context
   nitro.hooks.hook('request', event => {
-    const socket = getHeader(event,'x-socket')
+    const id = cookie ? getCookie(event, cookie.name) : getHeader(event,'io')
 
-    event.context.io = event.context.io || {} as SocketH3EventContext
-    event.context.io.server = io
-
-    event.context.io.to = (uid, ev, ...message) => {
-      io?.sockets?.adapter?.rooms.get(uid)?.forEach(id => {
-        return io.sockets.sockets.get(id)
-          ?.compress(true).emit(ev, ...message,event.method)
-      })
-      return true
+    event.context.io = {
+      server: io,
+      to: (uid, ev, ...message) => {
+        io?.sockets?.adapter?.rooms.get(uid)?.forEach(id => {
+          return io.sockets.sockets.get(id)
+            ?.emit(ev, ...message, event.method)
+        })
+        return true
+      },
+      self: (ev,...message) => {
+        if (!id) return false
+        io?.to(id).emit(ev, ...message, event.method)
+        return true
+      },
+      getId: () => id,
     }
-    event.context.io.self = (ev,...message) => {
-      if (!socket) return false
-      io?.to(socket).compress(true).emit(ev, ...message,event.method)
-      return true
-    }
-    event.context.io.getId = () => socket
   })
 
   // Close websocket on nitro closes

@@ -33,23 +33,51 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt: "^3.0.0",
     },
   },
-  defaults: {
+  defaults: nuxt => ({
     enabled: true,
     composables: true,
-    header:true,
-    client:{},
-    server:{}
-  },
+    client: {
+      path: '/websocket',
+      cookie: {
+        name: 'io',
+        path: '/',
+        sameSite: true,
+        secure: !nuxt.options.dev,
+      },
+    },
+    server: {
+      path: '/websocket',
+    },
+  }),
   async setup(options, nuxt) {
     if (!options.enabled) return
 
     if (!isNuxt3(nuxt))
       logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`)
 
-    // Config
+    // Set config defaults
+    if (options.client) {
+      const { client } = options
+      options.client = typeof client === "object" ? client : {}
+      if (client.cookie === true) {
+        options.client.cookie = {
+          name: 'io',
+          path: '/',
+          sameSite: true,
+          secure: !nuxt.options.dev,
+        }
+      }
+    }
+
+    if (options.server) {
+      const { server } = options
+      options.server = typeof server === "object" ? server : {}
+    }
+
+    const key = 'socket.io'
     const config = nuxt.options.runtimeConfig
-    config['socket.io'] = defu(config['socket.io'] || {},options.server)
-    config.public['socket.io'] = defu(config.public?.['socket.io'] || {},options.client)
+    config[key] = defu(config[key] || {}, options.server)
+    config.public[key] = defu(config.public?.[key] || {}, options.client)
 
     // Transpile
     nuxt.options.build.transpile.push(`${configKey}-client`)
@@ -59,11 +87,13 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.nitro.experimental.websocket = true
 
     // Add plugins
-    if (options.client !== false) addPlugin({ src: resolve(pluginsDir, "plugin") })
+    if (options.client) {
+      addPlugin({ src: resolve(pluginsDir, "plugin") })
+      if (!options.client.cookie) addPlugin({ src: resolve(pluginsDir, "fetch") })
+    }
 
     options.pinia ??= hasNuxtModule("@pinia/nuxt", nuxt)
     if (options.pinia) addPlugin({ src: resolve(pluginsDir, "pinia") })
-    if (options.header) addPlugin({ src: resolve(pluginsDir, "fetch") })
 
     // Import composables
     if (options.composables) addImportsDir(composablesDir)
@@ -82,7 +112,5 @@ export default defineNuxtModule<ModuleOptions>({
         from:resolve(serverDir, "services/useSocketIO"),
       }
     ])
-
-    logger.success("Socket.io connected");
   },
 })

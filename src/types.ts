@@ -2,12 +2,16 @@
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import type { ServerOptions, Server } from 'socket.io'
 
+type ClientOptions = SocketOptions & ManagerOptions & {
+  cookie: ServerOptions['cookie']
+}
+
 export interface ModuleOptions {
   enabled: boolean
 	pinia:boolean
   composables: boolean
   header?: boolean
-  client?: Partial<SocketOptions & ManagerOptions> | false
+  client?: Partial<ClientOptions> | false
   server?: Partial<ServerOptions> | false
 }
 
@@ -16,7 +20,7 @@ export interface ModuleRuntimeHooks {
 }
 
 export interface ModulePublicRuntimeConfig {
-  'socket.io': Partial<SocketOptions & ManagerOptions>
+  'socket.io': Partial<ClientOptions>
 }
 
 export interface ModuleRuntimeConfig {
