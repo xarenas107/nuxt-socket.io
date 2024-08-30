@@ -25,6 +25,9 @@ io.on('pong',msg => response.value = msg)
       Connected with id: {{ io.id }}
     </div>
     <div :style="{ paddingLeft: '1rem' }">
+      Connected: {{ io.status.connected }}
+    </div>
+    <div :style="{ paddingLeft: '1rem' }">
       Transport: {{ io.transport }}
     </div>
   </client-only>
