@@ -1,8 +1,17 @@
 import { io } from "socket.io-client"
 import type { Socket, SocketOptions, ManagerOptions } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig,useSocketIOStore } from '#imports'
+import type { ClientOptions } from "~/src/types"
 
 type SocketIOPlugin = { socket:Socket }
+
+declare module '#app' {
+  interface RuntimeNuxtHooks {
+    'socket.io:config': (options: Partial<ClientOptions>) => Promise<void> | void
+    'socket.io:done': (options:Socket) => Promise<void> | void
+  }
+}
+
 
 export default defineNuxtPlugin<SocketIOPlugin>({
   name:'nuxt-socket.io',
@@ -10,9 +19,11 @@ export default defineNuxtPlugin<SocketIOPlugin>({
   async setup(nuxt) {
     const runtime = useRuntimeConfig()
     const options = { ...runtime.public?.['socket.io'] } as Partial<SocketOptions & ManagerOptions>
-    const socket = io(options)
+    await nuxt.hooks.callHook('socket.io:config', options)
 
-    await nuxt.hooks.callHook('socket.io:done',socket)
+    const socket = io(options)
+    await nuxt.hooks.callHook('socket.io:done', socket)
+
     if (import.meta.client) window.onbeforeunload = () => { socket.close() }
     nuxt.provide('io', socket)
 

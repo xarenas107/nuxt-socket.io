@@ -2,7 +2,7 @@
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import type { ServerOptions, Server } from 'socket.io'
 
-type ClientOptions = SocketOptions & ManagerOptions & {
+export type ClientOptions = SocketOptions & ManagerOptions & {
   cookie: ServerOptions['cookie']
 }
 
@@ -16,6 +16,7 @@ export interface ModuleOptions {
 }
 
 export interface ModuleRuntimeHooks {
+  'socket.io:config': (options: Partial<ClientOptions>) => Promise<void> | void
   'socket.io:done': (options:Socket) => Promise<void> | void
 }
 
@@ -29,11 +30,6 @@ export interface ModuleRuntimeConfig {
 }
 
 export interface ModuleHooks {
-  'socket.io:server:done': (options:Server) => Promise<void> | void
-}
-
-declare module 'nitropack' {
-	interface NitroRuntimeHooks {
-    'socket.io:server:done': (options:Server) => Promise<void> | void
-  }
+  'socket.io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
+  'socket.io:server:done': (options: Server) => Promise<void> | void
 }

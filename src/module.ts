@@ -14,7 +14,7 @@ import {
 import { defu } from 'defu'
 
 import type { ModuleOptions } from "./types"
-export type * from "./types"
+export type { ModuleOptions, ModulePublicRuntimeConfig, ModuleRuntimeConfig, ModuleHooks, ModuleRuntimeHooks } from "./types"
 
 const configKey = "socket.io";
 const logger = useLogger(`nuxt:${configKey}`);
@@ -80,6 +80,7 @@ export default defineNuxtModule<ModuleOptions>({
     config.public[key] = defu(config.public?.[key] || {}, options.client)
 
     // Transpile
+    nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push(`${configKey}-client`)
 
     // Enable nitro websocket
@@ -112,5 +113,7 @@ export default defineNuxtModule<ModuleOptions>({
         from:resolve(serverDir, "services/useSocketIO"),
       }
     ])
+
+    logger.success('Websocket server initialized')
   },
 })

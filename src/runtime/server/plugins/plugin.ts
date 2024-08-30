@@ -2,7 +2,7 @@ import { Server } from 'socket.io'
 import { Server as Engine } from "engine.io"
 import { defineEventHandler, getCookie, getHeader } from 'h3'
 import { serialize } from "cookie";
-import { useRuntimeConfig } from '#imports'
+import { useRuntimeConfig } from 'nitropack/runtime'
 
 import type { NitroApp } from 'nitropack'
 import type { ServerOptions } from 'socket.io'
@@ -10,11 +10,19 @@ type NitroAppPlugin = (nitro: NitroApp) => void
 
 const defineNitroPlugin = (nitro: NitroAppPlugin) => nitro
 
+declare module 'nitropack' {
+	interface NitroRuntimeHooks {
+    'socket.io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
+    'socket.io:server:done': (options: Server) => Promise<void> | void
+  }
+}
+
 export default defineNitroPlugin(async nitro => {
   const runtime = useRuntimeConfig()
   const options = { ...runtime['socket.io'] } as Partial<ServerOptions>
   const { path = '/socket.io' } = options
 
+  await nitro.hooks.callHook('socket.io:server:config', options)
   const { cookie } = runtime.public['socket.io']
 
   // Avoid cookie overlaping
