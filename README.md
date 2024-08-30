@@ -5,7 +5,7 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-My new Nuxt module for doing amazing things.
+A Nuxt module for `socket.io`
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
@@ -41,10 +41,12 @@ export default defineNuxtConfig({
 
 > Extends socket.io configuration with `nuxt hooks`.
 
-| Hook                     | Argument  | #Enviroment  | Description                                  |
-|--------------------------|-----------|--------------|----------------------------------------------|
-| socket.io:server:done    | server    | server       |  Called before configuring socket.io server  |
-| socket.io:done           | socket    | client       | Called after socket.io-client initialization |
+| Hook                    | Argument         | #Enviroment | Description                                  |
+|-------------------------|------------------|-------------|----------------------------------------------|
+| socket.io:server:config | server options   | server      | Called before configuring socket.io server   |
+| socket.io:server:done   | socket server    | server      | Called after socket.io server initialization |
+| socket.io:config        | client options   | client      | Called before configuring socket.io-client   |
+| socket.io:done          | socket           | client      | Called after socket.io-client initialization |
 
 > Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useSocketIO()` on server side.
 
@@ -85,8 +87,8 @@ export default defineNitroPlugin(nitro => {
     if (!event.context.io?.server?.sockets?.adapter?.rooms?.has(uid)) {
       io.server.on('connection', socket => {
         if (!uid) return
-        socket.on('disconnect',() => socket.leave(uid))
         socket.join(uid)
+        socket.on('disconnect',() => socket.leave(uid))
       })
     }
   })
@@ -126,7 +128,7 @@ export default defineEventHandler(event => {
 })
 ```
 
-That's it! You can now use @nuxt/socket.io in your Nuxt app ✨
+That's it! You can now use `@xarenas107/nuxt-socket.io` in your Nuxt app ✨
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@xarenas107/nuxt-socket.io/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
