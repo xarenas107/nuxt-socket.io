@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.0.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v2.0.0...v2.0.1)
+
+### 🩹 Fixes
+
+- Solve missing types ([4ce9454](https://github.com/xarenas107/nuxt-socket.io/commit/4ce9454))
+
+### 🏡 Chore
+
+- Prepare for nuxt 4 ([4a4e836](https://github.com/xarenas107/nuxt-socket.io/commit/4a4e836))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v2.0.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v1.8.15...v2.0.0)
