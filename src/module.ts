@@ -47,7 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
       path: '/websocket',
     },
   }),
-  async setup(options, nuxt) {
+  setup(options, nuxt) {
     if (!options.enabled) return
 
     // Set config defaults
