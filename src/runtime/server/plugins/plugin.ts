@@ -69,10 +69,7 @@ export default defineNitroPlugin(async nitro => {
     event.context.io = {
       server: io,
       to: (uid, ev, ...message) => {
-        io?.sockets?.adapter?.rooms.get(uid)?.forEach(id => {
-          return io.sockets.sockets.get(id)
-            ?.emit(ev, ...message, event.method)
-        })
+        io?.to(uid)?.emit(ev, ...message, event.method)
         return true
       },
       self: (ev,...message) => {
