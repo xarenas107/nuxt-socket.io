@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.0.3
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.2...v3.0.3)
+
+### 🏡 Chore
+
+- Change package name ([a17c990](https://github.com/xarenas107/nuxt-socket.io/commit/a17c990))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.0.2
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.1...v3.0.2)
