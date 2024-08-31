@@ -1,8 +1,8 @@
 
 import type { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import type { ServerOptions, Server } from 'socket.io'
-
-export type ClientOptions = SocketOptions & ManagerOptions & {
+import type { HookResult } from '@nuxt/schema'
+type ClientOptions = SocketOptions & ManagerOptions & {
   cookie: ServerOptions['cookie']
 }
 
@@ -15,21 +15,14 @@ export interface ModuleOptions {
   server?: Partial<ServerOptions> | false
 }
 
-declare module 'nitropack' {
-	export interface NitroRuntimeHooks {
-    'io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
-    'io:server:done': (options: Server) => Promise<void> | void
-  }
-}
-
 export interface ModuleRuntimeHooks {
-  'io:config': (options: Partial<ClientOptions>) => Promise<void> | void
-  'io:done': (options:Socket) => Promise<void> | void
+  'io:config': (options: Partial<ClientOptions>) => HookResult
+  'io:done': (options:Socket) => HookResult
 }
 
 export interface ModuleHooks {
-  'io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
-  'io:server:done': (options: Server) => Promise<void> | void
+  'io:server:config': (options: Partial<ServerOptions>) => HookResult
+  'io:server:done': (options: Server) => HookResult
 }
 
 export interface ModulePublicRuntimeConfig {
@@ -38,4 +31,27 @@ export interface ModulePublicRuntimeConfig {
 
 export interface ModuleRuntimeConfig {
   io?: Partial<ServerOptions>
+}
+
+declare module '#app' {
+  interface RuntimeNuxtHooks {
+    'io:config': (options: Partial<ClientOptions>) => HookResult
+    'io:done': (options:Socket) => HookResult
+  }
+}
+
+declare module '@nuxt/schema' {
+  interface NuxtConfig {
+    io?: Partial<ModuleOptions>
+  }
+  interface NuxtOptions {
+    io?: ModuleOptions
+  }
+}
+
+declare module 'nitropack' {
+	interface NitroRuntimeHooks {
+    'io:server:config': (options: Partial<ServerOptions>) => HookResult
+    'io:server:done': (options: Server) => HookResult
+  }
 }

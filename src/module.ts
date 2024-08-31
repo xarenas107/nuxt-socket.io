@@ -13,15 +13,7 @@ import { configKey } from "./runtime/utils/constants"
 import { defu } from 'defu'
 
 import type { ModuleOptions } from "./types"
-export type { ModuleOptions, ModulePublicRuntimeConfig, ModuleRuntimeConfig, ModuleHooks, ModuleRuntimeHooks } from "./types"
-
-const logger = useLogger(`nuxt:${configKey}`);
-
-const { resolve } = createResolver(import.meta.url);
-const runtimeDir = resolve("./runtime");
-const pluginsDir = resolve(runtimeDir, "plugins");
-const composablesDir = resolve(runtimeDir, "composables");
-const serverDir = resolve(runtimeDir, "server");
+export type * from "./types"
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -49,6 +41,13 @@ export default defineNuxtModule<ModuleOptions>({
   }),
   setup(options, nuxt) {
     if (!options.enabled) return
+
+    const logger = useLogger(`nuxt:${configKey}`);
+    const { resolve } = createResolver(import.meta.url);
+    const runtimeDir = resolve("./runtime");
+    const pluginsDir = resolve(runtimeDir, "plugins");
+    const composablesDir = resolve(runtimeDir, "composables");
+    const serverDir = resolve(runtimeDir, "server");
 
     // Set config defaults
     if (options.client) {

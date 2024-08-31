@@ -1,7 +1,6 @@
 import { io } from "socket.io-client"
 import type { Socket, SocketOptions, ManagerOptions } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig,useSocketIOStore } from '#imports'
-import type { ClientOptions } from "~/src/types"
 import { configKey } from "../utils/constants"
 
 type SocketIOPlugin = { socket:Socket }
@@ -38,13 +37,3 @@ export default defineNuxtPlugin<SocketIOPlugin>({
 
   }
 })
-
-declare module '#app' {
-  interface NuxtApp {
-    $io: Socket
-  }
-  interface RuntimeNuxtHooks {
-    'io:config': (options: Partial<ClientOptions>) => Promise<void> | void
-    'io:done': (options:Socket) => Promise<void> | void
-  }
-}

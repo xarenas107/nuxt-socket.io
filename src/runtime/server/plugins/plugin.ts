@@ -11,13 +11,6 @@ type NitroAppPlugin = (nitro: NitroApp) => void
 
 const defineNitroPlugin = (nitro: NitroAppPlugin) => nitro
 
-declare module 'nitropack' {
-	interface NitroRuntimeHooks {
-    'io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
-    'io:server:done': (options: Server) => Promise<void> | void
-  }
-}
-
 export default defineNitroPlugin(async nitro => {
   const runtime = useRuntimeConfig()
   const options = { ...runtime.io } as Partial<ServerOptions>
