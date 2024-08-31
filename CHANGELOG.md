@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v3.0.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v2.0.1...v3.0.0)
+
+### 🩹 Fixes
+
+- **fetch:** Solve missing header in certain cases ([595d9d8](https://github.com/xarenas107/nuxt-socket.io/commit/595d9d8))
+
+### 🏡 Chore
+
+- **doc:** Update readme ([869ef82](https://github.com/xarenas107/nuxt-socket.io/commit/869ef82))
+- ⚠️  ConfigKey is now `io` ([60624ad](https://github.com/xarenas107/nuxt-socket.io/commit/60624ad))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  ConfigKey is now `io` ([60624ad](https://github.com/xarenas107/nuxt-socket.io/commit/60624ad))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v2.0.1
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v2.0.0...v2.0.1)
