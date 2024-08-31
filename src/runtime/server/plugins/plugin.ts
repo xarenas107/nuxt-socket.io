@@ -3,6 +3,7 @@ import { Server as Engine } from "engine.io"
 import { defineEventHandler, getCookie, getHeader } from 'h3'
 import { serialize } from "cookie";
 import { useRuntimeConfig } from 'nitropack/runtime'
+import { configKey } from '../../utils/constants';
 
 import type { NitroApp } from 'nitropack'
 import type { ServerOptions } from 'socket.io'
@@ -12,18 +13,18 @@ const defineNitroPlugin = (nitro: NitroAppPlugin) => nitro
 
 declare module 'nitropack' {
 	interface NitroRuntimeHooks {
-    'socket.io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
-    'socket.io:server:done': (options: Server) => Promise<void> | void
+    'io:server:config': (options: Partial<ServerOptions>) => Promise<void> | void
+    'io:server:done': (options: Server) => Promise<void> | void
   }
 }
 
 export default defineNitroPlugin(async nitro => {
   const runtime = useRuntimeConfig()
-  const options = { ...runtime['socket.io'] } as Partial<ServerOptions>
+  const options = { ...runtime.io } as Partial<ServerOptions>
   const { path = '/socket.io' } = options
 
-  await nitro.hooks.callHook('socket.io:server:config', options)
-  const { cookie } = runtime.public['socket.io']
+  await nitro.hooks.callHook(`${configKey}:server:config`, options)
+  const { cookie } = runtime.public[configKey]
 
   // Avoid cookie overlaping
   if (options.cookie) {
@@ -40,7 +41,7 @@ export default defineNitroPlugin(async nitro => {
 
   io.bind(engine)
 
-  await nitro.hooks.callHook('socket.io:server:done', io)
+  await nitro.hooks.callHook(`${configKey}:server:done`, io)
 
   io.on('connection', (socket) => {
     engine.once('headers', headers => {

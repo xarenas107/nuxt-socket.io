@@ -41,12 +41,12 @@ export default defineNuxtConfig({
 
 > Extends socket.io configuration with `nuxt hooks`.
 
-| Hook                    | Argument         | #Enviroment | Description                                  |
-|-------------------------|------------------|-------------|----------------------------------------------|
-| socket.io:server:config | server options   | server      | Called before configuring socket.io server   |
-| socket.io:server:done   | socket server    | server      | Called after socket.io server initialization |
-| socket.io:config        | client options   | client      | Called before configuring socket.io-client   |
-| socket.io:done          | socket           | client      | Called after socket.io-client initialization |
+| Hook             | Argument         | #Enviroment | Description                                  |
+|------------------|------------------|-------------|----------------------------------------------|
+| io:server:config | server options   | server      | Called before configuring socket.io server   |
+| io:server:done   | socket server    | server      | Called after socket.io server initialization |
+| io:config        | client options   | client      | Called before configuring socket.io-client   |
+| io:done          | socket           | client      | Called after socket.io-client initialization |
 
 > Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useSocketIO()` on server side.
 
@@ -121,8 +121,8 @@ export default defineEventHandler(event => {
   const body = await readBody(event)
   
   // Send data to client
-  const socket = useSocketIO(event)
-  socket.emit('message', body)
+  const io = useSocketIO(event)
+  io.emit('message', body)
 
   return null
 })

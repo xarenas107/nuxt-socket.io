@@ -3,20 +3,18 @@ import {
   useLogger,
   createResolver,
   hasNuxtModule,
-  isNuxt3,
-  getNuxtVersion,
   addPlugin,
   addImportsDir,
   addServerImports,
   addServerPlugin,
   addImports,
 } from "@nuxt/kit"
+import { configKey } from "./runtime/utils/constants"
 import { defu } from 'defu'
 
 import type { ModuleOptions } from "./types"
 export type { ModuleOptions, ModulePublicRuntimeConfig, ModuleRuntimeConfig, ModuleHooks, ModuleRuntimeHooks } from "./types"
 
-const configKey = "socket.io";
 const logger = useLogger(`nuxt:${configKey}`);
 
 const { resolve } = createResolver(import.meta.url);
@@ -27,7 +25,7 @@ const serverDir = resolve(runtimeDir, "server");
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: `@nuxt/${configKey}`,
+    name: `@nuxt/socket.io`,
     configKey,
     compatibility: {
       nuxt: "^3.0.0",
@@ -52,9 +50,6 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     if (!options.enabled) return
 
-    if (!isNuxt3(nuxt))
-      logger.error(`Cannot support nuxt version: ${getNuxtVersion(nuxt)}`)
-
     // Set config defaults
     if (options.client) {
       const { client } = options
@@ -74,14 +69,13 @@ export default defineNuxtModule<ModuleOptions>({
       options.server = typeof server === "object" ? server : {}
     }
 
-    const key = 'socket.io'
     const config = nuxt.options.runtimeConfig
-    config[key] = defu(config[key] || {}, options.server)
-    config.public[key] = defu(config.public?.[key] || {}, options.client)
+    config[configKey] = defu(config[configKey] || {}, options.server)
+    config.public[configKey] = defu(config.public?.[configKey] || {}, options.client)
 
     // Transpile
     nuxt.options.build.transpile.push(runtimeDir)
-    nuxt.options.build.transpile.push(`${configKey}-client`)
+    nuxt.options.build.transpile.push(`socket.io-client`)
 
     // Enable nitro websocket
     nuxt.options.nitro.experimental ||= {}
@@ -114,6 +108,6 @@ export default defineNuxtModule<ModuleOptions>({
       }
     ])
 
-    logger.success('Websocket server initialized')
+    logger.success('Socket.io initialized')
   },
 })

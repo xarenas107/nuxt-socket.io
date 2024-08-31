@@ -1,14 +1,13 @@
 import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount, defineStore } from '#imports'
 import { getUid } from './parseNameFromInstance'
+import { configKey } from './constants'
 
 import type { StoreDefinition } from 'pinia'
 import type { SocketIOStoreActions, SocketIOStoreState } from './types'
 
-const key = 'socket.io'
-
 type Store = StoreDefinition<'soket.io', SocketIOStoreState, object, SocketIOStoreActions>
 
-export const useSocketIOStore = defineStore(key,() => {
+export const useSocketIOStore = defineStore(configKey,() => {
 	const io = useSocketIO()
 
 	// State

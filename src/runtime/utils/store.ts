@@ -1,6 +1,7 @@
 import { reactive, onMounted, onBeforeUnmount } from 'vue-demi'
 import { useSocketIO, useState } from '#imports'
 import { getUid } from './parseNameFromInstance'
+import { configKey } from './constants'
 
 import type { Socket } from "socket.io-client"
 import type { SocketIOStoreActions, SocketIOStoreState } from './types'
@@ -9,7 +10,7 @@ export const useSocketIOStore = (socket?:Socket) => {
   const io = socket || useSocketIO()
 
 	// State
-  const store = useState<SocketIOStoreState['value']>('socket.io:store',() => new Map())
+  const store = useState<SocketIOStoreState['value']>(`${configKey}:store`,() => new Map())
 
   const state = reactive({
     id: io?.id ?? '',

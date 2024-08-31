@@ -2,27 +2,20 @@ import { io } from "socket.io-client"
 import type { Socket, SocketOptions, ManagerOptions } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig,useSocketIOStore } from '#imports'
 import type { ClientOptions } from "~/src/types"
+import { configKey } from "../utils/constants"
 
 type SocketIOPlugin = { socket:Socket }
-
-declare module '#app' {
-  interface RuntimeNuxtHooks {
-    'socket.io:config': (options: Partial<ClientOptions>) => Promise<void> | void
-    'socket.io:done': (options:Socket) => Promise<void> | void
-  }
-}
-
 
 export default defineNuxtPlugin<SocketIOPlugin>({
   name:'nuxt-socket.io',
   parallel:true,
   async setup(nuxt) {
     const runtime = useRuntimeConfig()
-    const options = { ...runtime.public?.['socket.io'] } as Partial<SocketOptions & ManagerOptions>
-    await nuxt.hooks.callHook('socket.io:config', options)
+    const options = { ...runtime.public?.[configKey] } as Partial<SocketOptions & ManagerOptions>
+    await nuxt.hooks.callHook(`${configKey}:config`, options)
 
     const socket = io(options)
-    await nuxt.hooks.callHook('socket.io:done', socket)
+    await nuxt.hooks.callHook(`${configKey}:done`, socket)
 
     if (import.meta.client) window.onbeforeunload = () => { socket.close() }
     nuxt.provide('io', socket)
@@ -51,6 +44,7 @@ declare module '#app' {
     $io: Socket
   }
   interface RuntimeNuxtHooks {
-    'socket.io:done': (options:Socket) => Promise<void> | void
+    'io:config': (options: Partial<ClientOptions>) => Promise<void> | void
+    'io:done': (options:Socket) => Promise<void> | void
   }
 }
