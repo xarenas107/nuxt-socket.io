@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v3.0.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.0...v3.0.1)
+
+### 🩹 Fixes
+
+- **types:** Try to solve missing autocomplete module options ([48a57db](https://github.com/xarenas107/nuxt-socket.io/commit/48a57db))
+
+### 💅 Refactors
+
+- Remove unnecesary async module ([dd916f4](https://github.com/xarenas107/nuxt-socket.io/commit/dd916f4))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.0.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v2.0.1...v3.0.0)
