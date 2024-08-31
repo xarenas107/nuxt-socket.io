@@ -24,17 +24,17 @@ A Nuxt module for `socket.io`
 ## 📦 Install
 
 ```bash
-npm i @xarenas107/nuxt-socket.io -D 
+npm i @xarenas107/nuxt-socket-io -D 
 ```
 
 ## 🦄 Usage
 
-> Add `@xarenas107/nuxt-socket.io` to the `modules` section of `nuxt.config.ts`.
+> Add `@xarenas107/nuxt-socket-io` to the `modules` section of `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
   modules: [
-    '@xarenas107/nuxt-socket.io'
+    '@xarenas107/nuxt-socket-io'
   ]
 })
 ```
@@ -128,17 +128,17 @@ export default defineEventHandler(event => {
 })
 ```
 
-That's it! You can now use `@xarenas107/nuxt-socket.io` in your Nuxt app ✨
+That's it! You can now use `@xarenas107/nuxt-socket-io` in your Nuxt app ✨
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@xarenas107/nuxt-socket.io/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/@xarenas107/nuxt-socket.io
+[npm-version-src]: https://img.shields.io/npm/v/@xarenas107/nuxt-socket-io/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/@xarenas107/nuxt-socket-io
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/@xarenas107/nuxt-socket.io.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/@xarenas107/nuxt-socket.io
+[npm-downloads-src]: https://img.shields.io/npm/dm/@xarenas107/nuxt-socket-io.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/@xarenas107/nuxt-socket-io
 
-[license-src]: https://img.shields.io/npm/l/@xarenas107/nuxt-socket.io.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/@xarenas107/nuxt-socket.io
+[license-src]: https://img.shields.io/npm/l/@xarenas107/nuxt-socket-io.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://npmjs.com/package/@xarenas107/nuxt-socket-io
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
