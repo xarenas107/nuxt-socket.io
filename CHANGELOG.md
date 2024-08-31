@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.0.5
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.4...v3.0.5)
+
+### 🩹 Fixes
+
+- **options:** Don't send cookie if option is disabled ([155612a](https://github.com/xarenas107/nuxt-socket.io/commit/155612a))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.0.4
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.3...v3.0.4)
