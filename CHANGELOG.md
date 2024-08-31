@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.0.2
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.1...v3.0.2)
+
+### 🩹 Fixes
+
+- **types:** Try to solve missing autocomplete module options ([fffe2e8](https://github.com/xarenas107/nuxt-socket.io/commit/fffe2e8))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.0.1
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.0...v3.0.1)
