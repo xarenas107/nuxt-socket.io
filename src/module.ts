@@ -13,7 +13,7 @@ import { configKey } from "./runtime/utils/constants"
 import { defu } from 'defu'
 
 import type { ModuleOptions } from "./types"
-export type * from "./types"
+export * from "./types"
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {

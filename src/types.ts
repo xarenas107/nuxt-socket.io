@@ -10,7 +10,6 @@ export interface ModuleOptions {
   enabled: boolean
 	pinia?:boolean
   composables?: boolean
-  header?: boolean
   client?: Partial<ClientOptions> | false
   server?: Partial<ServerOptions> | false
 }
@@ -34,10 +33,7 @@ export interface ModuleRuntimeConfig {
 }
 
 declare module '#app' {
-  interface RuntimeNuxtHooks {
-    'io:config': (options: Partial<ClientOptions>) => HookResult
-    'io:done': (options:Socket) => HookResult
-  }
+  interface RuntimeNuxtHooks extends ModuleRuntimeHooks {}
 }
 
 declare module '@nuxt/schema' {
@@ -47,11 +43,10 @@ declare module '@nuxt/schema' {
   interface NuxtOptions {
     io?: ModuleOptions
   }
+  interface NuxtHooks extends ModuleHooks {}
+  interface PublicRuntimeConfig extends ModulePublicRuntimeConfig {}
 }
 
 declare module 'nitropack' {
-	interface NitroRuntimeHooks {
-    'io:server:config': (options: Partial<ServerOptions>) => HookResult
-    'io:server:done': (options: Server) => HookResult
-  }
+	interface NitroRuntimeHooks extends ModuleHooks {}
 }
