@@ -1,9 +1,9 @@
 import { Server } from 'socket.io'
 import { Server as Engine } from "engine.io"
 import { defineEventHandler, getCookie, getHeader } from 'h3'
-import { serialize } from "cookie";
+import { serialize } from 'cookie'
 import { useRuntimeConfig } from 'nitropack/runtime'
-import { configKey } from '../../utils/constants';
+import { configKey } from '../../utils/constants'
 
 import type { NitroApp } from 'nitropack'
 import type { ServerOptions } from 'socket.io'
@@ -14,9 +14,9 @@ const defineNitroPlugin = (nitro: NitroAppPlugin) => nitro
 export default defineNitroPlugin(async nitro => {
   const runtime = useRuntimeConfig()
   const options = { ...runtime.io } as Partial<ServerOptions>
-  const { path = '/socket.io' } = options
-
   await nitro.hooks.callHook(`${configKey}:server:config`, options)
+
+  const { path = '/socket.io' } = options
   const { cookie } = runtime.public[configKey]
 
   // Avoid cookie overlaping
@@ -36,11 +36,13 @@ export default defineNitroPlugin(async nitro => {
 
   await nitro.hooks.callHook(`${configKey}:server:done`, io)
 
-  io.on('connection', (socket) => {
-    engine.once('headers', headers => {
-      headers['set-cookie'] = serialize(cookie.name, socket.id, cookie)
+  if (cookie) {
+    io.on('connection', (socket) => {
+      engine.once('headers', headers => {
+        headers['set-cookie'] = serialize(cookie.name, socket.id, cookie)
+      })
     })
-  })
+  }
 
   nitro.router.use(path, defineEventHandler({
     handler(event) {
