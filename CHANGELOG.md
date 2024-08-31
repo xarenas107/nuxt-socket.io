@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v3.0.4
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.3...v3.0.4)
+
+### 🩹 Fixes
+
+- **doc:** Solve wrong package info ([243fcac](https://github.com/xarenas107/nuxt-socket.io/commit/243fcac))
+
+### 💅 Refactors
+
+- Minor optimizations ([888acc0](https://github.com/xarenas107/nuxt-socket.io/commit/888acc0))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.0.3
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.2...v3.0.3)
