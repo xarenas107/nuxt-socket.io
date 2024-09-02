@@ -15,13 +15,13 @@ export const useSocketIOStore = (socket?:Socket) => {
   const io = socket || useSocketIO()
 
 	// State
-  const store = useState<Store.State['value']>(`${configKey}:store`,() => new Map())
-
+  const store = useState(`${configKey}:store`,() => new Map())
   const state = reactive<State>({
-    id: io?.id ?? '',
+    id: io?.id,
     value: store,
-    transport: 'N/A',
+    transport: undefined,
     status: {
+      active: false,
       pending: false,
       connected: false,
       error: null

@@ -24,6 +24,7 @@ io.on('pong',msg => response.value = msg)
   <div>Connected with id: {{ io.id }}</div>
   <div>Connected: {{ io.status.connected }}</div>
   <div>Loading: {{ io.status.pending }}</div>
+  <div>Active: {{ io.status.active }}</div>
   <div>Transport: {{ io.transport }}</div>
   <div>Error: {{ `${io.status.error?.message}` }}</div>
 </template>

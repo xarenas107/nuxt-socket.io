@@ -10,10 +10,11 @@ export interface Actions {
 
 
 export interface State {
-	id:string
+	id:string | undefined
 	value: Map<string,Set<string>>
-  transport: string
+  transport: 'polling' | 'websocket' | 'webtransport' | (string & {}) | undefined
   status: {
+    active: boolean
     pending: boolean
     connected: boolean
     error: Error | null

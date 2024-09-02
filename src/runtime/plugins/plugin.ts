@@ -29,32 +29,34 @@ export default defineNuxtPlugin<SocketIOPlugin>({
       store.status.error = null
       store.status.connected = true
       store.status.pending = false
+      store.status.active = true
 
-      socket.io.engine.on("upgrade", (response) => {
+      socket.io.engine.on('upgrade', (response) => {
         store.transport = response.name
       })
     })
 
-    socket.io.on("reconnect_failed", () => {
+    socket.io.on('reconnect_failed', () => {
       store.status.connected = store.status.pending = false
-      store.transport = 'N/A'
+      store.transport = undefined
+      store.status.active = false
     })
 
-    socket.on("connect_error", (error) => {
+    socket.on('connect_error', (error) => {
       store.status.error = error
       store.status.connected = false
       store.status.pending = socket.active
-      store.transport = 'N/A'
+      store.transport = undefined
     })
 
     socket.on('disconnect',() => {
       store.status.connected = store.status.pending = false
-      store.transport = 'N/A'
+      store.transport = undefined
     })
 
     // Enable connection on client side only
     if (options.autoConnect) {
-      store.status.pending = true
+      store.status.pending = store.status.active = true
       if (import.meta.client) nextTick(() => socket.connect())
     }
   }

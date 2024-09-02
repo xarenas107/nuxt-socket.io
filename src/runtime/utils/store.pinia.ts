@@ -10,10 +10,11 @@ export const useSocketIOStore = defineStore(configKey,() => {
 
 	// State
 	const state = reactive<IOStore.State>({
-		id: io?.id ?? '',
+		id: io.id,
 		value: new Map(),
-    transport: 'N/A',
+    transport: undefined,
     status: {
+      active: false,
       pending: false,
       connected: false,
       error: null,
