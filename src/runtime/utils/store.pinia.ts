@@ -1,11 +1,11 @@
 import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount } from '#imports'
 import { getUid } from './parseNameFromInstance'
 import { configKey } from './constants'
-import { defineStore } from 'pinia'
+import { defineStore, acceptHMRUpdate } from 'pinia'
 
 import type * as IOStore from './types'
 
-export const useSocketIOStore = defineStore(configKey,() => {
+export const store = defineStore(configKey,() => {
 	const io = useSocketIO()
 
 	// State
@@ -72,3 +72,8 @@ export const useSocketIOStore = defineStore(configKey,() => {
 		...actions
 	}
 })
+
+// Support hot module replacement
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(store, import.meta.hot))
+}

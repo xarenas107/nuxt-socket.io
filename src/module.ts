@@ -93,9 +93,12 @@ export default defineNuxtModule<ModuleOptions>({
     // Import composables
     if (options.composables) addImportsDir(composablesDir)
 
-    const name = 'useSocketIOStore'
-    if (options.pinia) addImports({ from: resolve(runtimeDir,'utils/store.pinia'), name })
-    else addImports({ from: resolve(runtimeDir,'utils/store'), name })
+    const path = options.pinia ? 'utils/store.pinia' : 'utils/store'
+    addImports({
+      from: resolve(runtimeDir, path),
+      as: 'useSocketIOStore',
+      name: 'store',
+    })
 
     // Add server plugin
     if (options.server !== false) addServerPlugin(resolve(serverDir, "plugins/plugin"));

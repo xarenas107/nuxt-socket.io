@@ -4,14 +4,14 @@ import { getUid } from './parseNameFromInstance'
 import { configKey } from './constants'
 
 import type { Socket } from "socket.io-client"
-import type * as Store from './types'
 import type { Ref } from 'vue-demi'
+import type * as Store from './types'
 
 interface State extends Omit<Store.State, 'value'> {
   value: Ref<Store.State['value']>
 }
 
-export const useSocketIOStore = (socket?:Socket) => {
+export const store = (socket?:Socket) => {
   const io = socket || useSocketIO()
 
 	// State
