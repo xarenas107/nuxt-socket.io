@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v3.1.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.5...v3.1.0)
+
+### 🚀 Enhancements
+
+- **store:** Add status `pending` & `error` ([4488869](https://github.com/xarenas107/nuxt-socket.io/commit/4488869))
+- **store:** Add status `active` ([65bd37c](https://github.com/xarenas107/nuxt-socket.io/commit/65bd37c))
+
+### 🏡 Chore
+
+- **pinia:** Support HMR ([7ff352c](https://github.com/xarenas107/nuxt-socket.io/commit/7ff352c))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.0.5
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.0.4...v3.0.5)
