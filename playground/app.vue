@@ -1,34 +1,29 @@
 <script lang="ts" setup>
-import { ref } from 'vue-demi'
+import { shallowRef } from 'vue-demi'
 import { useSocketIOStore } from '#imports'
 
-const response = ref('Request from client')
+const response = shallowRef('Request from client')
 const { execute } = useFetch('api/ping',{ immediate:false })
 
 const io = useSocketIOStore()
+const socket = useSocketIO()
 io.on('pong',msg => response.value = msg)
 </script>
 
 <template>
+  <button @click="io.connect()">
+    Connect
+  </button>
+  <button @click="socket.disconnect()">
+    Disconnect
+  </button>
   <button @click="execute()">
     Fetch
   </button>
-  <span :style="{ paddingLeft: '1rem' }"> {{ response }} </span>
-  <client-only>
-    <template #fallback>
-      <div :style="{ paddingLeft: '1rem' }">
-        Connecting...
-      </div>
-    </template>
-
-    <div :style="{ paddingLeft: '1rem' }">
-      Connected with id: {{ io.id }}
-    </div>
-    <div :style="{ paddingLeft: '1rem' }">
-      Connected: {{ io.status.connected }}
-    </div>
-    <div :style="{ paddingLeft: '1rem' }">
-      Transport: {{ io.transport }}
-    </div>
-  </client-only>
+  <div style="padding-top: 1rem">{{ response }}</div>
+  <div>Connected with id: {{ io.id }}</div>
+  <div>Connected: {{ io.status.connected }}</div>
+  <div>Loading: {{ io.status.pending }}</div>
+  <div>Transport: {{ io.transport }}</div>
+  <div>Error: {{ `${io.status.error?.message}` }}</div>
 </template>

@@ -28,6 +28,7 @@ export default defineNuxtModule<ModuleOptions>({
     composables: true,
     client: {
       path: '/websocket',
+      autoConnect: true,
       cookie: {
         name: 'io',
         path: '/',

@@ -1,28 +1,32 @@
-import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount, defineStore } from '#imports'
+import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount } from '#imports'
 import { getUid } from './parseNameFromInstance'
 import { configKey } from './constants'
+import { defineStore } from 'pinia'
 
-import type { StoreDefinition } from 'pinia'
-import type { SocketIOStoreActions, SocketIOStoreState } from './types'
-
-type Store = StoreDefinition<'soket.io', SocketIOStoreState, object, SocketIOStoreActions>
+import type * as IOStore from './types'
 
 export const useSocketIOStore = defineStore(configKey,() => {
 	const io = useSocketIO()
 
 	// State
-	const state = reactive<SocketIOStoreState>({
+	const state = reactive<IOStore.State>({
 		id: io?.id ?? '',
 		value: new Map(),
     transport: 'N/A',
     status: {
       pending: false,
-      connected: false
+      connected: false,
+      error: null,
     }
 	})
 
 	// Actions
-	const actions:SocketIOStoreActions = {
+	const actions:IOStore.Actions = {
+		connect: () => {
+      if (io.connected) return
+			state.status.pending = true
+			io.connect()
+		},
 		on: (event, listener, component) => {
 			component = getUid(event, component)
 			if (!state.value.has(event)) state.value.set(event,new Set())
@@ -59,16 +63,11 @@ export const useSocketIOStore = defineStore(configKey,() => {
 				if (component) state.value?.get(event)?.delete(component)
 			}
 		},
-		emit: (event,...args) => {
-      state.status.pending = true
-      return io.emit(event, ...args, () => {
-        state.status.pending = false
-      })
-    },
+		emit: (event,...args) => io.emit(event, ...args),
 	}
 
 	return {
 		...toRefs(state),
 		...actions
 	}
-}) as Store
+})

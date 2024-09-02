@@ -4,27 +4,38 @@ import { getUid } from './parseNameFromInstance'
 import { configKey } from './constants'
 
 import type { Socket } from "socket.io-client"
-import type { SocketIOStoreActions, SocketIOStoreState } from './types'
+import type * as Store from './types'
+import type { Ref } from 'vue-demi'
+
+interface State extends Omit<Store.State, 'value'> {
+  value: Ref<Store.State['value']>
+}
 
 export const useSocketIOStore = (socket?:Socket) => {
   const io = socket || useSocketIO()
 
 	// State
-  const store = useState<SocketIOStoreState['value']>(`${configKey}:store`,() => new Map())
+  const store = useState<Store.State['value']>(`${configKey}:store`,() => new Map())
 
-  const state = reactive({
+  const state = reactive<State>({
     id: io?.id ?? '',
     value: store,
     transport: 'N/A',
     status: {
       pending: false,
-      connected: false
+      connected: false,
+      error: null
     }
   })
 
 	// Actions
 
-	const actions:SocketIOStoreActions = {
+	const actions:Store.Actions = {
+    connect: () => {
+      if (io.connected) return
+      state.status.pending = true
+      io.connect()
+    },
 		on: (event, listener, component) => {
 			component = getUid(event, component)
 			if (!state.value.has(event)) state.value.set(event,new Set())
@@ -61,12 +72,7 @@ export const useSocketIOStore = (socket?:Socket) => {
 				if (component) state.value?.get(event)?.delete(component)
 			}
 		},
-		emit: (event,...args) => {
-      state.status.pending = true
-      return io.emit(event, ...args, () => {
-        state.status.pending = false
-      })
-    },
+		emit: (event,...args) => io.emit(event, ...args),
 	}
 
 	return {
