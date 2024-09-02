@@ -23,6 +23,8 @@ export default defineNuxtPlugin<SocketIOPlugin>({
     nuxt.provide('io', socket)
 
     const store = useSocketIOStore()
+
+    // Handle status with events
     socket.on('connect',() => {
       store.id = socket.id || ''
       store.transport = socket.io.engine.transport.name
@@ -36,12 +38,6 @@ export default defineNuxtPlugin<SocketIOPlugin>({
       })
     })
 
-    socket.io.on('reconnect_failed', () => {
-      store.status.connected = store.status.pending = false
-      store.transport = undefined
-      store.status.active = false
-    })
-
     socket.on('connect_error', (error) => {
       store.status.error = error
       store.status.connected = false
@@ -49,12 +45,18 @@ export default defineNuxtPlugin<SocketIOPlugin>({
       store.transport = undefined
     })
 
+    socket.io.on('reconnect_failed', () => {
+      store.status.connected = store.status.pending = false
+      store.transport = undefined
+      store.status.active = false
+    })
+
     socket.on('disconnect',() => {
       store.status.connected = store.status.pending = false
       store.transport = undefined
     })
 
-    // Enable connection on client side only
+    // Connect on client side only
     if (options.autoConnect) {
       store.status.pending = store.status.active = true
       if (import.meta.client) nextTick(() => socket.connect())
