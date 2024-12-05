@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   modules: ['../src/module', '@pinia/nuxt'],
   compatibilityDate: '2024-08-15',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   nitro: {
     experimental: {
       websocket: true,
