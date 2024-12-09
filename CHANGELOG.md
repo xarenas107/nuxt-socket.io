@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v3.2.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.0...v3.2.1)
+
 ## v3.2.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.1.0...v3.2.0)
