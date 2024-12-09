@@ -41,7 +41,7 @@ declare module '@nuxt/schema' {
     io?: Partial<ModuleOptions>
   }
   interface NuxtOptions {
-    io?: ModuleOptions
+    io: ModuleOptions
   }
   interface NuxtHooks extends ModuleHooks {}
   interface PublicRuntimeConfig extends ModulePublicRuntimeConfig {}
