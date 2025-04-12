@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v3.2.2
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.1...v3.2.2)
+
+### 🩹 Fixes
+
+- Solve bad types ([d2263fe](https://github.com/xarenas107/nuxt-socket.io/commit/d2263fe))
+- **node:** Add missing `engine.io` package ([cc1e713](https://github.com/xarenas107/nuxt-socket.io/commit/cc1e713))
+
+### 🏡 Chore
+
+- **node:** Update dependences ([e309886](https://github.com/xarenas107/nuxt-socket.io/commit/e309886))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](http://github.com/xarenas107))
+
 ## v3.2.1
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.0...v3.2.1)
