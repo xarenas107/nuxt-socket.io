@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.2.4
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.3...v3.2.4)
+
+### 🩹 Fixes
+
+- **pinia:** Solve undefined id in certain cases ([390f636](https://github.com/xarenas107/nuxt-socket.io/commit/390f636))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.3
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.2...v3.2.3)
