@@ -10,7 +10,7 @@ export const store = defineStore(configKey,() => {
 
 	// State
 	const state = reactive<IOStore.State>({
-		id: io.id,
+		id: io?.id,
 		value: new Map(),
     transport: undefined,
     status: {
