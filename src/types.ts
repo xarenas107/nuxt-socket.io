@@ -16,7 +16,7 @@ export interface ModuleOptions {
 
 export interface ModuleRuntimeHooks {
   'io:config': (options: Partial<ClientOptions>) => HookResult
-  'io:done': (options:Socket) => HookResult
+  'io:done': (io:Socket, options?: Partial<ClientOptions>) => HookResult
 }
 
 export interface ModuleHooks {

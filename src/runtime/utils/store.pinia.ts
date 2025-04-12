@@ -12,13 +12,13 @@ export const store = defineStore(configKey,() => {
 	const state = reactive<IOStore.State>({
 		id: io?.id,
 		value: new Map(),
-    transport: undefined,
-    status: {
-      active: false,
-      pending: false,
-      connected: false,
-      error: null,
-    }
+		transport: undefined,
+		status: {
+		active: false,
+		pending: false,
+		connected: false,
+		error: null,
+		}
 	})
 
 	// Actions
@@ -74,6 +74,6 @@ export const store = defineStore(configKey,() => {
 })
 
 // Support hot module replacement
-if (import.meta.hot) {
+if (import.meta?.hot) {
   import.meta.hot.accept(acceptHMRUpdate(store, import.meta.hot))
 }

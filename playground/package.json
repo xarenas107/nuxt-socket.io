@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "nuxt": "latest"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.11.0"
   }
 }

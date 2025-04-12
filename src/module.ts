@@ -84,15 +84,15 @@ export default defineNuxtModule<ModuleOptions>({
     // Add plugins
     if (options.client) {
       addPlugin({ src: resolve(pluginsDir, "plugin") })
+      addPlugin({ src: resolve(pluginsDir, "store") })
+
       if (!options.client.cookie) addPlugin({ src: resolve(pluginsDir, "fetch") })
     }
-
-    options.pinia ??= hasNuxtModule("@pinia/nuxt", nuxt)
-    if (options.pinia) addPlugin({ src: resolve(pluginsDir, "pinia") })
 
     // Import composables
     if (options.composables) addImportsDir(composablesDir)
 
+    options.pinia = options.pinia !== false || hasNuxtModule('@pinia/nuxt')
     const path = options.pinia ? 'utils/store.pinia' : 'utils/store'
     addImports({
       from: resolve(runtimeDir, path),

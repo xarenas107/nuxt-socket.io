@@ -29,7 +29,6 @@ export const store = (socket?:Socket) => {
   })
 
 	// Actions
-
 	const actions:Store.Actions = {
     connect: () => {
       if (io.connected) return
@@ -76,7 +75,6 @@ export const store = (socket?:Socket) => {
 	}
 
 	return {
-    $io: io,
     ...state,
     ...actions
   }
