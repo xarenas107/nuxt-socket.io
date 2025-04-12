@@ -8,7 +8,7 @@ declare module 'pinia' {
 }
 
 export default defineNuxtPlugin({
-  dependsOn:['nuxt-socket.io'],
+  dependsOn:['pinia', 'nuxt-socket.io'],
   setup(nuxt){
     (nuxt?.$pinia as any)?.use(() => ({ '$io':nuxt.$io }))
   }

@@ -2,13 +2,14 @@ import { io } from "socket.io-client"
 import type { Socket } from "socket.io-client"
 import { defineNuxtPlugin, useRuntimeConfig,useSocketIOStore } from '#imports'
 import { configKey } from "../utils/constants"
-import { nextTick } from "vue"
 
 type SocketIOPlugin = { socket:Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>({
   name:'nuxt-socket.io',
   parallel:true,
+  enforce: 'pre',
+  order: -1,
   async setup(nuxt) {
     const runtime = useRuntimeConfig()
     const options = { ...runtime.public?.[configKey] }
@@ -51,7 +52,7 @@ export default defineNuxtPlugin<SocketIOPlugin>({
       store.status.active = false
     })
 
-    socket.on('disconnect',() => {
+    socket.on('disconnect', () => {
       store.status.connected = store.status.pending = false
       store.transport = undefined
     })
@@ -59,7 +60,7 @@ export default defineNuxtPlugin<SocketIOPlugin>({
     // Connect on client side only
     if (options.autoConnect) {
       store.status.pending = store.status.active = true
-      if (import.meta.client) nextTick(() => socket.connect())
+      if (import.meta.client) socket.connect()
     }
   }
 })
