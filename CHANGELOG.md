@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.2.3
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.2...v3.2.3)
+
+### 🩹 Fixes
+
+- **module-builder:** Solve some integration errors ([a241503](https://github.com/xarenas107/nuxt-socket.io/commit/a241503))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.2
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.1...v3.2.2)
