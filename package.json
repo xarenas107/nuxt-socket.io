@@ -51,7 +51,6 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.9.3",
     "h3": "^1.13.0",
     "socket.io": "^4.7.4",
     "socket.io-client": "^4.7.4"
@@ -59,8 +58,9 @@
   "devDependencies": {
     "@nuxt/devtools": "^1.5.2",
     "@nuxt/eslint-config": "^0.7.2",
+    "@nuxt/kit": "^3.16.2",
     "@nuxt/module-builder": "^0.8.3",
-    "@nuxt/schema": "^3.6.5",
+    "@nuxt/schema": "^3.16.2",
     "@nuxt/test-utils": "^3.15.1",
     "@pinia/nuxt": "^0.9.0",
     "@types/node": "^22.7.4",
@@ -69,7 +69,7 @@
     "defu": "^6.1.4",
     "engine.io": "^6.6.2",
     "eslint": "^9.12.0",
-    "nuxt": "^3.14.1592",
+    "nuxt": "^3.16.2",
     "vitest": "^2.1.2"
   },
   "overrides": {
