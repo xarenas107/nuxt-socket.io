@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.2.5
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.4...v3.2.5)
+
+### 🩹 Fixes
+
+- **pinia:** Await for pinia plugin ([8f3d786](https://github.com/xarenas107/nuxt-socket.io/commit/8f3d786))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.4
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.3...v3.2.4)
