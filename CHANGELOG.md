@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v3.2.7
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.6...v3.2.7)
+
+### 💅 Refactors
+
+- Code optimization ([76c7955](https://github.com/xarenas107/nuxt-socket.io/commit/76c7955))
+
+### 🏡 Chore
+
+- **release:** V3.2.6 ([f7872b6](https://github.com/xarenas107/nuxt-socket.io/commit/f7872b6))
+- **node:** Update dependences ([ea869c3](https://github.com/xarenas107/nuxt-socket.io/commit/ea869c3))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.6
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.5...v3.2.6)
