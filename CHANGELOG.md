@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v3.2.8
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.6...v3.2.8)
+
+### 🩹 Fixes
+
+- Solve minor bugs ([ce722e9](https://github.com/xarenas107/nuxt-socket.io/commit/ce722e9))
+
+### 🏡 Chore
+
+- Update compatibility with `nuxt 4` ([d0067de](https://github.com/xarenas107/nuxt-socket.io/commit/d0067de))
+- **release:** V3.2.7 ([42b43cb](https://github.com/xarenas107/nuxt-socket.io/commit/42b43cb))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.7
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.6...v3.2.7)
