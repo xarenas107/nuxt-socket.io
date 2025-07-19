@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v3.2.7
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.6...v3.2.7)
+
+### 🏡 Chore
+
+- Update compatibility with `nuxt 4` ([d0067de](https://github.com/xarenas107/nuxt-socket.io/commit/d0067de))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.6
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.5...v3.2.6)
