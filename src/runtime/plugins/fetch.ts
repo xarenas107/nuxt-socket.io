@@ -10,7 +10,7 @@ export default defineNuxtPlugin({
 
         if (socket.id) {
           const io = socket?.id
-          options.headers = { ...options.headers, io }
+          options.headers.append('io', io)
         }
       }
     }

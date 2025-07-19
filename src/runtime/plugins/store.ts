@@ -1,5 +1,6 @@
-import type { NuxtApp } from '#app'
 import { defineNuxtPlugin, useSocketIOStore } from '#imports'
+import type { NuxtApp } from '#app'
+
 declare module 'pinia' {
   interface PiniaCustomProperties {
     $io: NuxtApp['$io']

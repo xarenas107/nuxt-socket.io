@@ -1,10 +1,10 @@
-import { reactive, onMounted, onBeforeUnmount } from 'vue-demi'
+import { reactive, onMounted, onBeforeUnmount } from 'vue'
 import { useSocketIO, useState } from '#imports'
 import { getUid } from './parseNameFromInstance'
 import { configKey } from './constants'
 
 import type { Socket } from "socket.io-client"
-import type { Ref } from 'vue-demi'
+import type { Ref } from 'vue'
 import type * as Store from './types'
 
 interface State extends Omit<Store.State, 'value'> {
