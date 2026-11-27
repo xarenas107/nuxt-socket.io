@@ -1,5 +1,4 @@
 import { defineHandler } from 'nitro/h3'
-import { useSocketIO } from '#socket-io/server'
 
 export default defineHandler((event) => {
   const io = useSocketIO(event)

@@ -96,7 +96,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Import composables
     if (options.composables) addImportsDir(composablesDir)
 
-    options.pinia = options.pinia !== false || hasNuxtModule('@pinia/nuxt')
+    options.pinia = options.pinia !== false && hasNuxtModule('@pinia/nuxt')
     const path = options.pinia ? 'utils/store.pinia' : 'utils/store'
 
     addImports({
