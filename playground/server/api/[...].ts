@@ -1,4 +1,3 @@
-import { useSocketIO, useRuntimeConfig } from '#imports'
 
 export default defineEventHandler((event) => {
   const runtime = useRuntimeConfig()

@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v4.0.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v4.0.0...v4.0.1)
+
+### 🎨 Styles
+
+- Apply lint formatting ([2c03562](https://github.com/xarenas107/nuxt-socket.io/commit/2c03562))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v4.0.0
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.8...v4.0.0)
