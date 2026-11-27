@@ -8,12 +8,12 @@ declare module 'pinia' {
 }
 
 export default defineNuxtPlugin({
-  setup(nuxt){
+  setup(nuxt) {
     nuxt.hook('io:done', (socket, options) => {
       const store = useSocketIOStore()
 
       // Handle status with events
-      socket.on('connect',() => {
+      socket.on('connect', () => {
         store.id = socket.id || ''
         store.transport = socket.io.engine.transport.name
         store.status.error = null
@@ -50,5 +50,5 @@ export default defineNuxtPlugin({
         if (import.meta.client) socket.connect()
       }
     })
-  }
+  },
 })

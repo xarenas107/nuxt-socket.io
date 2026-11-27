@@ -1,6 +1,49 @@
 # Changelog
 
 
+## v4.0.1
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v4.0.0...v4.0.1)
+
+### 🎨 Styles
+
+- Apply lint formatting ([2c03562](https://github.com/xarenas107/nuxt-socket.io/commit/2c03562))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
+## v4.0.0
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.8...v4.0.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Migrate to Nitro v3 and update dependencies ([dffbc4f](https://github.com/xarenas107/nuxt-socket.io/commit/dffbc4f))
+
+### 🩹 Fixes
+
+- Solve minor bugs ([ce722e9](https://github.com/xarenas107/nuxt-socket.io/commit/ce722e9))
+
+### 🏡 Chore
+
+- Update compatibility with `nuxt 4` ([d0067de](https://github.com/xarenas107/nuxt-socket.io/commit/d0067de))
+- **release:** V3.2.7 ([42b43cb](https://github.com/xarenas107/nuxt-socket.io/commit/42b43cb))
+- **release:** V3.2.8 ([c7a023a](https://github.com/xarenas107/nuxt-socket.io/commit/c7a023a))
+- **release:** V3.2.9 ([b26cc06](https://github.com/xarenas107/nuxt-socket.io/commit/b26cc06))
+
+### ✅ Tests
+
+- Centralize Vitest setup ([125b307](https://github.com/xarenas107/nuxt-socket.io/commit/125b307))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Migrate to Nitro v3 and update dependencies ([dffbc4f](https://github.com/xarenas107/nuxt-socket.io/commit/dffbc4f))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v3.2.9
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v3.2.8...v3.2.9)

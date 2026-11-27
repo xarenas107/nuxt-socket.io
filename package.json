@@ -5,7 +5,7 @@
     "email": "xarenas107@gmail.com"
   },
   "private": false,
-  "version": "3.2.9",
+  "version": "4.0.1",
   "description": "Nuxt module for socket.io",
   "keywords": [
     "websocket",
@@ -30,49 +30,53 @@
   "files": [
     "dist"
   ],
-  "build": {
-    "externals": [
-      "socket.io-client",
-      "socket.io",
-      "defu"
-    ]
-  },
   "scripts": {
     "prepare": "nuxt-module-build prepare",
     "prepack": "nuxt-module-build build",
-    "build": "nuxi build-module",
-    "dev": "nuxi dev playground",
+    "build": "nuxt-module-build build",
+    "dev": "nuxt dev playground",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxi prepare playground",
-    "release": "npm run lint && npm run prepack && changelogen --release && npm publish --access public && git push --follow-tags",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "release:pre": "npm run lint && npm run test && npm run prepack && changelogen --release",
+    "release": "npm run release:pre && npm publish --access public && git push --follow-tags",
     "lint": "eslint . --fix",
-    "test": "vitest run",
+    "test": "vitest run --no-file-parallelism",
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "h3": "^1.13.0",
-    "socket.io": "^4.7.4",
-    "socket.io-client": "^4.7.4"
+    "cookie": "^2.0.2",
+    "defu": "^6.1.7",
+    "engine.io": "^6.6.13",
+    "nitro": "^3.0.261103-rc",
+    "socket.io": "^4.8.4",
+    "socket.io-client": "^4.8.4"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^2.3.2",
-    "@nuxt/eslint-config": "^1.6.0",
-    "@nuxt/kit": "^4.0.0",
-    "@nuxt/module-builder": "^1.0.1",
-    "@nuxt/schema": "^4.0.0",
-    "@nuxt/test-utils": "^3.19.2",
-    "@pinia/nuxt": "^0.11.2",
-    "@types/cookie": "^0.6.0",
-    "@types/node": "^24.0.15",
+    "@nuxt/devtools": "^4.2.0",
+    "@nuxt/eslint-config": "^1.17.0",
+    "@nuxt/kit": "^4.7.0",
+    "@nuxt/module-builder": "^1.0.4",
+    "@nuxt/schema": "^4.7.0",
+    "@nuxt/test-utils": "^4.4.0",
+    "@pinia/nuxt": "^1.0.3",
+    "@types/node": "^26.6.11",
     "changelogen": "^0.6.2",
-    "crossws": "^0.4.1",
-    "defu": "^6.1.4",
-    "engine.io": "^6.6.2",
-    "eslint": "^9.31.0",
-    "nuxt": "^4.0.0",
-    "vitest": "^3.2.4"
+    "crossws": "^0.4.17",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.15.0",
+    "jiti": "^2.7.0",
+    "nuxt": "^4.7.0",
+    "pinia": "^4.1.0",
+    "unbuild": "^3.6.1",
+    "vitest": "^5.1.2"
   },
-  "overrides": {
-    "vue": "latest"
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.25.8": true,
+    "esbuild@0.25.5": true,
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.11.1": true,
+    "@parcel/watcher@2.5.1": true
   }
 }

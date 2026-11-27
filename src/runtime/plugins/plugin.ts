@@ -1,13 +1,14 @@
-import { io } from "socket.io-client"
-import type { Socket } from "socket.io-client"
+import { io } from 'socket.io-client'
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
-import { configKey } from "../utils/constants"
+import { configKey } from '../utils/constants'
 
-type SocketIOPlugin = { socket:Socket }
+import type { Socket } from 'socket.io-client'
+
+type SocketIOPlugin = { socket: Socket }
 
 export default defineNuxtPlugin<SocketIOPlugin>({
-  name:'nuxt-socket.io',
-  parallel:true,
+  name: 'nuxt-socket.io',
+  parallel: true,
   async setup(nuxt) {
     const runtime = useRuntimeConfig()
     const options = { ...runtime.public?.[configKey] }
@@ -20,5 +21,5 @@ export default defineNuxtPlugin<SocketIOPlugin>({
 
     nuxt.provide('io', socket)
     await nuxt.hooks.callHook(`${configKey}:done`, socket, options)
-  }
+  },
 })

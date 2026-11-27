@@ -1,4 +1,3 @@
-
 export default defineNuxtConfig({
-  modules: ['../../../src/module']
+  modules: ['../../../src/module'],
 })
