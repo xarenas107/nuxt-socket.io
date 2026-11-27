@@ -50,21 +50,63 @@ export default defineNuxtConfig({
 })
 ```
 
-> Extends socket.io configuration with `nuxt hooks`.
-
-| Hook             | Argument         | #Enviroment | Description                                  |
-|------------------|------------------|-------------|----------------------------------------------|
-| io:server:config | server options   | server      | Called before configuring socket.io server   |
-| io:server:done   | socket server    | server      | Called after socket.io server initialization |
-| io:config        | client options   | client      | Called before configuring socket.io-client   |
-| io:done          | socket           | client      | Called after socket.io-client initialization |
-
-> Server hooks are registered from a Nitro plugin with `nitro.hooks.hook('io:server:config' | 'io:server:done', ...)`. The socket.io route is registered at build time from the `io.server.path` option, so changing `path` inside `io:server:config` has no effect.
-
-> Use `useSocketIO()` or `useSocketIOStore()` on client side and `useSocketIO(event)` on server side, auto-imported, or imported from `#socket-io/server` when server auto-imports are disabled (Nuxt 5 default).
+## ⚙️ Options
 
 ```js
-// On client side
+export default defineNuxtConfig({
+  io: {
+    enabled: true, // Disable the whole module with `false`
+    composables: true, // Auto import `useSocketIO()` on client side
+    pinia: true, // Use a Pinia store for `useSocketIOStore()` (only when `@pinia/nuxt` is installed)
+    // socket.io-client options, `false` disables the client plugins
+    client: {
+      path: '/websocket',
+      autoConnect: true,
+      // Cookie that identifies the client on server side, `false` sends an `io` header on `$fetch` instead
+      cookie: { name: 'io', path: '/', sameSite: true, secure: true }, // `secure` is `false` in dev
+    },
+    // socket.io server options, `false` disables the server
+    server: {
+      path: '/websocket',
+    },
+  },
+})
+```
+
+> `client.path` and `server.path` must match. If you change one, change both.
+
+## 🪝 Hooks
+
+> Client hooks are Nuxt app runtime hooks (`nuxtApp.hook(...)` in a Nuxt plugin). Server hooks are Nitro runtime hooks (`nitro.hooks.hook(...)` in a Nitro plugin).
+
+| Hook             | Arguments         | Environment | Description                                  |
+|------------------|-------------------|-------------|----------------------------------------------|
+| io:server:config | server options    | server      | Called before configuring socket.io server   |
+| io:server:done   | socket server     | server      | Called after socket.io server initialization |
+| io:config        | client options    | client      | Called before configuring socket.io-client   |
+| io:done          | socket, options   | client      | Called after socket.io-client initialization |
+
+> The socket.io route is registered at build time from the `io.server.path` option, so changing `path` inside `io:server:config` has no effect.
+
+## 🔌 Server context
+
+`useSocketIO(event)` (same as `event.context.io`) returns:
+
+| Property                    | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| `server`                    | The socket.io `Server` instance                                             |
+| `getId()`                   | Socket id of the client that made the request, if any                       |
+| `self(event, ...args)`      | Emit to the client that made the request. Returns `false` if it has no id   |
+| `to(room, event, ...args)`  | Emit to a socket id or room                                                 |
+
+> `self` and `to` append the request HTTP method as the last argument of the emitted event.
+
+> The client is identified by the `io` cookie, or by the `io` header that `$fetch` sends when `client.cookie` is `false`.
+
+> Use `useSocketIO()` or `useSocketIOStore()` on client side and `useSocketIO(event)` on server side, both auto-imported.
+
+```vue
+<!-- On client side -->
 <script lang='ts' setup>
   const io = useSocketIOStore() // Prevent duplicated listener
   io.on('pong',(message:string) => console.log(message))
@@ -76,7 +118,6 @@ export default defineNuxtConfig({
 ```js
 // On server side `server/api/ping.ts`
 import { defineEventHandler } from 'nuxt/server'
-import { useSocketIO } from '#socket-io/server'
 
 export default defineEventHandler(event => {
   // You can access to io server through `event.context.io` or `useSocketIO(event).server`
@@ -93,23 +134,15 @@ export default defineEventHandler(event => {
 ```js
 // On server side plugin `server/plugins/wss.ts`
 import { definePlugin } from 'nitro'
-import { getEventContext } from 'nitro/h3'
 
 export default definePlugin(nitro => {
-
-  // Add nitro hook
-  nitro.hooks.hook('request', event => {
-    const { session, user, io } = getEventContext(event)
-    const uid = user?.id || session?.user?.toString()
-
-    // Add connection listener
-    if (!event.context.io?.server?.sockets?.adapter?.rooms?.has(uid)) {
-      io.server.on('connection', socket => {
-        if (!uid) return
-        socket.join(uid)
-        socket.on('disconnect',() => socket.leave(uid))
-      })
-    }
+  // Register the connection listener once, when the socket.io server is ready
+  nitro.hooks.hook('io:server:done', io => {
+    io.on('connection', socket => {
+      // e.g. sent by the client with `options.auth = { uid }` in the `io:config` hook
+      const uid = socket.handshake.auth?.uid
+      if (uid) socket.join(uid) // socket.io leaves rooms on disconnect
+    })
   })
 })
 ```
@@ -138,14 +171,13 @@ declare module 'h3' {
 ```js
 // On server handler `server/api/chat.post.ts`
 import { defineEventHandler, readBody } from 'nuxt/server'
-import { useSocketIO } from '#socket-io/server'
 
 export default defineEventHandler(async event => {
   const body = await readBody(event)
   
-  // Send data to client
+  // Send data to all clients
   const io = useSocketIO(event)
-  io.emit('message', body)
+  io.server.emit('message', body)
 
   return null
 })
@@ -155,7 +187,7 @@ export default defineEventHandler(async event => {
 
 - Install `nitro` (Nuxt 4.7+) or upgrade to Nuxt 5. `nitropack` (Nitro v2) is no longer supported.
 - `defineNitroPlugin` → `definePlugin` from `nitro`; server utils (`defineEventHandler`, `getCookie`, `readBody`, ...) from `nuxt/server`.
-- `useSocketIO(event)` is still auto-imported; with auto-imports disabled import it from `#socket-io/server`.
+- `useSocketIO(event)` is still auto-imported on server side.
 - `nitro.experimental.websocket` is set for you as `nitro.features.websocket`.
 - `pinia` integration is now only enabled when `@pinia/nuxt` is installed.
 
