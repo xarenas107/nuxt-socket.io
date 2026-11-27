@@ -19,9 +19,9 @@ dist
 # Nuxt
 .nuxt
 .output
+.data
 .vercel_build_output
 .build-*
-.env
 .netlify
 
 # Env
@@ -41,7 +41,7 @@ coverage
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
-# Intellij idea
+# Intellijidea
 *.iml
 .idea
 
@@ -54,3 +54,6 @@ coverage
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Workspace
+**/.db

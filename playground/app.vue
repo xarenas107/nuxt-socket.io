@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { shallowRef } from 'vue-demi'
+import { shallowRef } from 'vue'
 import { useSocketIOStore } from '#imports'
 
 const response = shallowRef('Request from client')
-const { execute } = useFetch('api/ping',{ immediate:false })
+const { execute } = useFetch('api/ping', { immediate: false })
 
 const io = useSocketIOStore()
 const socket = useSocketIO()
-io.on('pong',msg => response.value = msg)
+io.on('pong', msg => response.value = msg)
 </script>
 
 <template>
@@ -20,7 +20,9 @@ io.on('pong',msg => response.value = msg)
   <button @click="execute()">
     Fetch
   </button>
-  <div style="padding-top: 1rem">{{ response }}</div>
+  <div style="padding-top: 1rem">
+    {{ response }}
+  </div>
   <div>Connected with id: {{ io.id }}</div>
   <div>Connected: {{ io.status.connected }}</div>
   <div>Loading: {{ io.status.pending }}</div>

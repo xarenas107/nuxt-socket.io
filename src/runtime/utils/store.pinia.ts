@@ -1,76 +1,21 @@
-import { useSocketIO, toRefs, reactive, onMounted, onBeforeUnmount } from '#imports'
-import { getUid } from './parseNameFromInstance'
+import { useSocketIO, reactive, toRefs } from '#imports'
 import { configKey } from './constants'
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import shared, { defaults } from './store.shared'
 
-import type * as IOStore from './types'
+import type { State } from './types'
 
-export const store = defineStore(configKey,() => {
-	const io = useSocketIO()
+export const store = defineStore(configKey, () => {
+  const io = useSocketIO()
+  const { id } = io
 
-	// State
-	const state = reactive<IOStore.State>({
-		id: io?.id,
-		value: new Map(),
-		transport: undefined,
-		status: {
-		active: false,
-		pending: false,
-		connected: false,
-		error: null,
-		}
-	})
+  const state = reactive<State>({ ...defaults, id })
+  const store = shared(io, state)
 
-	// Actions
-	const actions:IOStore.Actions = {
-		connect: () => {
-      if (io.connected) return
-			state.status.pending = true
-			io.connect()
-		},
-		on: (event, listener, component) => {
-			component = getUid(event, component)
-			if (!state.value.has(event)) state.value.set(event,new Set())
-
-			const socket = io.on(event,listener)
-			state.value?.get(event)?.add(component)
-
-			return () => {
-				socket.off(event, listener)
-				if (component) state.value?.get(event)?.delete(component)
-			}
-		},
-		off: event => {
-			io.off(event)
-			state.value.delete(event)
-		},
-		setup: (event, listener, component) => {
-			component = getUid(event, component)
-			if (!state.value.has(event)) state.value.set(event,new Set())
-
-			onMounted(() => {
-				io.on(event, listener)
-				if (component) state.value?.get(event)?.add(component)
-			})
-			onBeforeUnmount(() => {
-				io.off(event, listener)
-
-				const name = state.value.get(event)
-				if (component) name?.delete(component)
-			})
-
-      return () => {
-				io.off(event, listener)
-				if (component) state.value?.get(event)?.delete(component)
-			}
-		},
-		emit: (event,...args) => io.emit(event, ...args),
-	}
-
-	return {
-		...toRefs(state),
-		...actions
-	}
+  return {
+    ...toRefs(store.state),
+    ...store.actions,
+  }
 })
 
 // Support hot module replacement

@@ -12,14 +12,25 @@ A Nuxt module for `socket.io`
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
 ## 🚀 Features
 
-- ⛰ **Nuxt 3 ready**
+- ⛰ **Nuxt 4.7+ / Nuxt 5 ready**
 - 👌 **Zero config**: Configuration for common use cases
-- ⚡ **Nitro ready**: Integration with nitro server.
+- ⚡ **Nitro v3 ready**: Integration with the Nitro v3 server (websocket + long-polling).
 - 🍍 **Pinia ready**: Integration with `@pinia/nuxt` module.
 - ⚙️ **Auto import**: Provide auto import functions for client and server side.
 - 🪝 **Customizable**: Provide hooks for customization on client and server side.
 - 🦾 **Type strong**: Written in typescript
 <!-- - 👀 **Nuxt devTools**: ready to inspect with the [Nuxt DevTools](https://github.com/nuxt/devtools) inspector -->
+
+## ✅ Requirements
+
+- Nuxt `>= 4.7` with **Nitro v3** (or Nuxt 5, where Nitro v3 is the default)
+- A Node.js server runtime (the module uses the Node.js request/socket under the hood)
+
+On Nuxt 4.7+, Nitro v3 is enabled by declaring the `nitro` package in your project:
+
+```bash
+npm i nitro
+```
 
 ## 📦 Install
 
@@ -48,7 +59,9 @@ export default defineNuxtConfig({
 | io:config        | client options   | client      | Called before configuring socket.io-client   |
 | io:done          | socket           | client      | Called after socket.io-client initialization |
 
-> Use `useSocketIO()` or `useSocketIOStore()` on client side and the `useSocketIO()` on server side.
+> Server hooks are registered from a Nitro plugin with `nitro.hooks.hook('io:server:config' | 'io:server:done', ...)`. The socket.io route is registered at build time from the `io.server.path` option, so changing `path` inside `io:server:config` has no effect.
+
+> Use `useSocketIO()` or `useSocketIOStore()` on client side and `useSocketIO(event)` on server side, auto-imported, or imported from `#socket-io/server` when server auto-imports are disabled (Nuxt 5 default).
 
 ```js
 // On client side
@@ -61,9 +74,12 @@ export default defineNuxtConfig({
 ```
 
 ```js
-// On server side
+// On server side `server/api/ping.ts`
+import { defineEventHandler } from 'nuxt/server'
+import { useSocketIO } from '#socket-io/server'
+
 export default defineEventHandler(event => {
-  // You can access to io server through `event.context.io` or `useSocketIO().server`
+  // You can access to io server through `event.context.io` or `useSocketIO(event).server`
   const io = useSocketIO(event)
   
   const id = io.getId()
@@ -76,11 +92,14 @@ export default defineEventHandler(event => {
 
 ```js
 // On server side plugin `server/plugins/wss.ts`
-export default defineNitroPlugin(nitro => {
+import { definePlugin } from 'nitro'
+import { getEventContext } from 'nitro/h3'
+
+export default definePlugin(nitro => {
 
   // Add nitro hook
-  nitro.hooks.hook('render:response', (response,{ event }) => {
-    const { session, user, io } = event.context
+  nitro.hooks.hook('request', event => {
+    const { session, user, io } = getEventContext(event)
     const uid = user?.id || session?.user?.toString()
 
     // Add connection listener
@@ -98,6 +117,7 @@ export default defineNitroPlugin(nitro => {
 ```js
 // On server side middleware `server/middleware/wss.ts`
 import type { Server } from 'socket.io'
+import { defineEventHandler } from 'nuxt/server'
 
 export default defineEventHandler(event => {
   const { session, user, io } = event.context
@@ -117,7 +137,10 @@ declare module 'h3' {
 
 ```js
 // On server handler `server/api/chat.post.ts`
-export default defineEventHandler(event => {
+import { defineEventHandler, readBody } from 'nuxt/server'
+import { useSocketIO } from '#socket-io/server'
+
+export default defineEventHandler(async event => {
   const body = await readBody(event)
   
   // Send data to client
@@ -127,6 +150,14 @@ export default defineEventHandler(event => {
   return null
 })
 ```
+
+## ⬆️ Migrating from v3 (Nitro v2)
+
+- Install `nitro` (Nuxt 4.7+) or upgrade to Nuxt 5. `nitropack` (Nitro v2) is no longer supported.
+- `defineNitroPlugin` → `definePlugin` from `nitro`; server utils (`defineEventHandler`, `getCookie`, `readBody`, ...) from `nuxt/server`.
+- `useSocketIO(event)` is still auto-imported; with auto-imports disabled import it from `#socket-io/server`.
+- `nitro.experimental.websocket` is set for you as `nitro.features.websocket`.
+- `pinia` integration is now only enabled when `@pinia/nuxt` is installed.
 
 That's it! You can now use `@xarenas107/nuxt-socket-io` in your Nuxt app ✨
 

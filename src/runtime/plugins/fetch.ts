@@ -1,21 +1,20 @@
-import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack'
 import { defineNuxtPlugin, useSocketIO } from '#imports'
+import type { FetchOptions } from 'nuxt/app'
 
 export default defineNuxtPlugin({
-  dependsOn:['nuxt-socket.io'],
+  dependsOn: ['nuxt-socket.io'],
   async setup() {
-    const options:NitroFetchOptions<NitroFetchRequest> = {
+    const options: FetchOptions = {
       onRequest: ({ options }) => {
         const socket = useSocketIO()
 
-        if (socket.id) {
-          const io = socket?.id
-          options.headers.append('io', io)
-        }
-      }
+        if (!socket.id) return
+        const io = socket?.id
+        options.headers.append('io', io)
+      },
     }
 
     const $fetch = globalThis.$fetch.create(options)
     globalThis.$fetch = $fetch
-  }
+  },
 })

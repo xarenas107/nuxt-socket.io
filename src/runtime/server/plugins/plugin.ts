@@ -1,22 +1,36 @@
 import { Server } from 'socket.io'
-import { Server as Engine } from "engine.io"
-import { defineEventHandler, getCookie, getHeader } from 'h3'
-import { serialize } from 'cookie'
-import { useRuntimeConfig } from 'nitropack/runtime'
+import { Server as Engine } from 'engine.io'
+import { stringifySetCookie } from 'cookie'
 import { configKey } from '../../utils/constants'
+import { definePlugin } from 'nitro'
+import { getCookie, getEventContext } from 'nitro/h3'
+import { useRuntimeConfig } from 'nuxt/server'
 
 import type { ServerOptions } from 'socket.io'
-import type { NitroApp } from 'nitropack/types'
-type NitroAppPlugin = (nitro: NitroApp) => void
+import type { SetCookie } from 'cookie'
+import type { H3EventContext } from 'nitro/h3'
 
-const defineNitroPlugin = (nitro: NitroAppPlugin) => nitro
+type CookieOptions = Omit<SetCookie, 'name' | 'value'>
 
-export default defineNitroPlugin(async nitro => {
+function serialize(name: string, value: string, options: CookieOptions) {
+  return stringifySetCookie({ ...options, name, value })
+}
+
+export interface SocketIOInstance {
+  io: Server
+  engine: Engine
+}
+
+let instance: SocketIOInstance | undefined
+
+// Shared with the route handler: Nitro v3 plugins cannot register routes at runtime
+export const useSocketIOInstance = () => instance
+
+export default definePlugin(async (nitro) => {
   const runtime = useRuntimeConfig()
-  const options = { ...runtime.io } as Partial<ServerOptions>
+  const options: Partial<ServerOptions> = { ...runtime.io }
   await nitro.hooks.callHook(`${configKey}:server:config`, options)
 
-  const { path = '/socket.io' } = options
   const { cookie } = runtime.public[configKey]
 
   // Avoid cookie overlaping
@@ -33,48 +47,33 @@ export default defineNitroPlugin(async nitro => {
   if (io) console.info('Websocket server initialized')
 
   io.bind(engine)
+  instance = { io, engine }
 
   await nitro.hooks.callHook(`${configKey}:server:done`, io)
 
   if (cookie) {
     io.on('connection', (socket) => {
-      engine.once('headers', headers => {
+      engine.once('headers', (headers) => {
         headers['set-cookie'] = serialize(cookie.name, socket.id, cookie)
       })
     })
   }
 
-  nitro.router.use(path, defineEventHandler({
-    handler(event) {
-      const { req, res } = event.node
-      engine.handleRequest(req as any, res)
-      event._handled = true
-    },
-    websocket: {
-      open(peer) {
-        // @ts-expect-error private method and property
-        const { nodeReq } = peer._internal
-        // @ts-expect-error private method and property
-        engine.prepare(nodeReq);
-        // @ts-expect-error private method and property
-        engine.onWebSocket(nodeReq, nodeReq.socket, peer.websocket)
-      },
-    },
-  }))
-
   // Set websocket context
-  nitro.hooks.hook('request', event => {
-    const id = cookie ? getCookie(event, cookie.name) : getHeader(event,'io')
+  nitro.hooks.hook('request', (event) => {
+    const id = cookie ? getCookie(event, cookie.name) : event.req.headers.get('io') ?? undefined
+    const { method } = event.req
 
-    event.context.io = {
+    const context = getEventContext<H3EventContext>(event)
+    context.io = {
       server: io,
-      to: (uid, ev, ...message) => {
-        io?.to(uid)?.emit(ev, ...message, event.method)
+      to: (uid: string, ev: string, ...message: any[]) => {
+        io?.to(uid)?.emit(ev, ...message, method)
         return true
       },
-      self: (ev,...message) => {
+      self: (ev: string, ...message: any[]) => {
         if (!id) return false
-        io?.to(id).emit(ev, ...message, event.method)
+        io?.to(id).emit(ev, ...message, method)
         return true
       },
       getId: () => id,
@@ -82,5 +81,8 @@ export default defineNitroPlugin(async nitro => {
   })
 
   // Close websocket on nitro closes
-  nitro.hooks.hook('close',() => io.close())
+  nitro.hooks.hook('close', () => {
+    io.close()
+    instance = undefined
+  })
 })
