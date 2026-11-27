@@ -125,7 +125,7 @@ export default defineNuxtModule<ModuleOptions>({
     addServerImports([
       {
         name: 'useSocketIO',
-        from: resolve(serverDir, 'services/useSocketIO'),
+        from: resolve(serverDir, 'services/use-socket-io'),
       },
     ])
 

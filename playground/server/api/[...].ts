@@ -1,5 +1,4 @@
-
-export default defineEventHandler((event) => {
+export default defineHandler((event) => {
   const runtime = useRuntimeConfig()
   const io = useSocketIO(event)
   const id = io.getId()
