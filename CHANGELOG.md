@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v4.0.2
+
+[compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v4.0.1...v4.0.2)
+
+### 💅 Refactors
+
+- Move server useSocketIO to nitro request context ([7a79483](https://github.com/xarenas107/nuxt-socket.io/commit/7a79483))
+
+### 📖 Documentation
+
+- Fix README examples and document options, hooks and server context ([5782002](https://github.com/xarenas107/nuxt-socket.io/commit/5782002))
+
+### ❤️ Contributors
+
+- Xavier ([@xarenas107](https://github.com/xarenas107))
+
 ## v4.0.1
 
 [compare changes](https://github.com/xarenas107/nuxt-socket.io/compare/v4.0.0...v4.0.1)
